@@ -1,0 +1,4 @@
+<resources>
+    <string name="liked_pets_title">Beğenilenler</string>
+    <string name="liked_pets_empty_message">Henüz hiçbir hayvanı beğenmediniz.</string>
+</resources>

@@ -1,0 +1,10 @@
+<resources>
+    <!-- Common strings that can be used across all feature modules -->
+
+    <!-- Discovery Screen -->
+    <string name="discovery_no_more_pets">No more pets to show!</string>
+    <string name="discovery_like_button_content_description">Like</string>
+    <string name="discovery_dislike_button_content_description">Dislike</string>
+    <string name="discovery_pet_age_format">%1$d years old</string>
+    <string name="discovery_pet_photo_content_description">Photo of %1$s</string>
+</resources>

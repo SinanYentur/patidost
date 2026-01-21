@@ -1,0 +1,11 @@
+# Configuration for detekt, the static code analysis tool.
+# This file will enforce our project's coding standards.
+
+build:
+  maxIssues: 0 # Fail build on any issue
+
+# Architectural rules are enforced by the Gradle module dependency graph.
+# Feature modules cannot depend on the data module, so imports are impossible.
+# The previous ForbiddenImport rule was removed as it was too broad and redundant.
+
+style: {}

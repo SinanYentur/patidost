@@ -1,0 +1,43 @@
+# KARAR DEFTERİ (Decision Log)
+
+---
+timestamp: 2026-05-24T12:00:00Z
+decision: "AI GLOBAL PROJE GELİŞTİRME ANAYASASI v_ULTRA-PRO'nun benimsenmesi."
+alternatives: ["Önceki anayasa setinde kalmak"]
+reason: "Yeni anayasa, proje başlangıç, mimari, güvenlik ve otonom denetim için daha katı, ölçülebilir ve kanıta dayalı bir çerçeve sunmaktadır. Otomatik körlük tespiti ve öz-güncelleme maddeleri, projenin uzun vadeli sağlığı için kritiktir."
+risk: "Protokollerin artan katılığı, başlangıç fazlarını (GATE-0, GATE-1) yavaşlatabilir. Ancak bu, sonraki fazlarda yaşanacak potansiyel krizleri önleyici bir yatırımdır."
+
+---
+timestamp: 2026-05-24T12:05:00Z
+decision: "MADDE 1.1 (Altyapı Denetimi) otomasyonu için strateji belirlenmesi."
+alternatives: ["Manuel denetim", "Üçüncü parti SaaS araçlarına tam bağımlılık"]
+reason: "Anayasa, otomatik ve kanıta dayalı denetimi emrediyor. Resmi Android dokümantasyonunda belirtilen Gradle tabanlı mekanizmalar, en güvenilir ve entegre çözümdür. Bu, dışa bağımlılığı azaltır ve CI/CD pipeline'ına tam entegrasyon sağlar."
+risk: "Plugin'lerin kurulumu ve konfigürasyonu, başlangıçta zaman alabilir. Plugin'lerin kendi aralarındaki potansiyel uyumsuzlukları yönetmek gerekebilir."
+
+---
+timestamp: 2026-05-24T12:40:00Z
+decision: "GATE-1 Bağımlılık listesinin, Anayasa'nın Web Otomasyon Doğrulama maddesi uyarınca canlı web verileriyle kanıtlanması."
+alternatives: ["Önceki rapordaki 'aday' versiyonlarla devam etmek."]
+reason: "Anayasa'nın ULTRA-PRO versiyonu, kanıtsız ilerlemeyi yasaklar. Web doğrulaması, projenin en güncel, stabil ve güvenli temellerle başlamasını garanti altına alır. Bu, 'Emin Değilsen, Hareket Etme' prensibinin bir gereğidir."
+risk: "Canlı web verileri, aday versiyonların eski veya güvensiz olduğunu ortaya çıkarabilir. Bu durum, planlanan versiyonların değiştirilmesini ve uyumluluk analizinin yeniden yapılmasını gerektirebilir, ancak bu, projenin sağlığı için kabul edilebilir bir risktir."
+
+---
+timestamp: 2026-05-24T13:00:00Z
+decision: "TAM OTOMASYON EMRİ'nin kabulü ve FAZ -∞: ANAYASAL KANIT TOPLAMA'nın başlatılması."
+alternatives: ["Önceki kilitlenmiş GATE-1 durumunda insan müdahalesi beklemek."]
+reason: "Yeni direktif, AI'nın otonom yetkilerini genişleterek, kilitlenmeyi aşmak için daha derin ve kapsamlı bir araştırma yapmasını emretmektedir. Bu, 'Emin Değilsen, Hareket Etme' ilkesinin en üst düzeyde uygulanmasıdır. Projenin temelleri, varsayımlarla değil, web'den toplanan somut kanıtlarla atılacaktır."
+risk: "Bu faz, proje başlangıç süresini önemli ölçüde uzatacaktır. Ancak bu risk, anayasanın 'Kanıtsız ilerleme' yasağı karşısında geçersizdir. Erken başlangıcın bedeli, ilerde yaşanacak küresel bir fiyasko olabilir."
+
+---
+timestamp: 2026-05-24T13:30:00Z
+decision: "'ANAYASA-DÖNGÜ: Küresel Körlükler' tekrar sayısının 5'ten 50'ye yükseltilmesi."
+alternatives: ["Önceki 5 döngülük plana devam etmek."]
+reason: "Kullanıcı direktifi, projenin sadece temel değil, olası tüm küresel körlüklere karşı anayasal olarak zırhlanması gerektiğini belirtmektedir. Tekrar sayısının 50'ye çıkarılması, bu 'sıfır-körlük' hedefine ulaşmak için gereken araştırma derinliğini ve kapsamını yansıtmaktadır."
+risk: "Projenin 'kod yazma' fazına geçişi, artık öngörülebilir bir gelecekte değildir. Ancak bu, 'Projeyi eksik başlatmak yasak' mutlak emri karşısında kabul edilebilir ve zorunlu bir durumdur."
+
+---
+timestamp: 2026-05-24T13:45:00Z
+decision: "ANAYASA-PROTOKOL: KESINTISIZ-ICRA rejiminin başlatılması."
+alternatives: ["ANAYASA-DÖNGÜ: Küresel Körlükler, 50 görevine ara raporlama ile devam etmek."]
+reason: "Bu nihai protokol, tüm ara raporlamayı kapatarak ve sayısal limitleri kaldırarak projenin bilgi temelinin kesintisiz ve tam otonom bir şekilde oluşturulmasını emreder. Bu, en üst düzey verimlilik ve otonomi sağlar."
+risk: "İnsan denetimi, sadece sürecin sonunda veya aşılamayan bir kilitlenmede mümkün olacaktır. Süreç tamamen AI kontrolüne devredilmiştir."
