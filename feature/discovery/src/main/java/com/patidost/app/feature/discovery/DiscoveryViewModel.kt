@@ -35,8 +35,8 @@ class DiscoveryViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     init {
-        loadPets()
         observeQuota()
+        loadPets()
     }
 
     private fun observeQuota() {
@@ -76,30 +76,36 @@ class DiscoveryViewModel @Inject constructor(
 
     fun onPetLiked() {
         val pet = uiState.value.currentPet ?: return
-        likePetInternal(pet)
+        likePetInternal(pet, isSuperLike = false)
     }
 
     fun onPetSuperLiked() {
         val pet = uiState.value.currentPet ?: return
 
         viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
             when (val quotaResult = quotaRepository.consumeSuperLike()) {
                 is Result.Success -> {
-                    analyticsService.logEvent("discovery_pet_super_liked", mapOf("pet_id" to pet.id))
-                    likePetInternal(pet) // Proceed with normal like logic after consuming quota
+                    likePetInternal(pet, isSuperLike = true)
                 }
                 is Result.Error -> {
-                    _uiState.update { it.copy(error = quotaResult.error.message) }
+                    _uiState.update { it.copy(isLoading = false, error = quotaResult.error.message) }
                 }
-                else -> {}
+                else -> {
+                    _uiState.update { it.copy(isLoading = false) }
+                }
             }
         }
     }
 
-    private fun likePetInternal(pet: Pet) {
+    private fun likePetInternal(pet: Pet, isSuperLike: Boolean) {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
-            analyticsService.logEvent("discovery_pet_liked", mapOf("pet_id" to pet.id))
+            if (!isSuperLike) {
+                _uiState.update { it.copy(isLoading = true) }
+            }
+
+            val eventName = if (isSuperLike) "discovery_pet_super_liked" else "discovery_pet_liked"
+            analyticsService.logEvent(eventName, mapOf("pet_id" to pet.id))
 
             when (val result = petRepository.likePet(pet.id)) {
                 is Result.Success -> {

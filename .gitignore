@@ -11,7 +11,6 @@ local.properties
 .externalNativeBuild/
 .cxx/
 app/src/main/assets/
-app/src/main/res/
 app/src/androidTest/
 app/src/test/
 *.log

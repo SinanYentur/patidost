@@ -33,15 +33,16 @@ class ProfileViewModel @Inject constructor(
 
     private fun loadCurrentUser() {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoading = true, error = null) }
             when (val result = authRepository.getCurrentUser()) {
                 is Result.Success -> {
                     _uiState.update { it.copy(isLoading = false, user = result.data) }
                 }
                 is Result.Error -> {
+                    // Standart 1: Hata kaynağını şeffaf bir şekilde UI katmanına ilet
                     _uiState.update { it.copy(isLoading = false, error = result.error.message) }
                 }
-                else -> { /* No-op */ }
+                else -> { _uiState.update { it.copy(isLoading = false) } }
             }
         }
     }
@@ -54,34 +55,46 @@ class ProfileViewModel @Inject constructor(
 
     private fun updateProfile(user: User) {
         viewModelScope.launch {
-            // Optimistically update the UI
-            _uiState.update { it.copy(user = user) }
+            // Standart 2: Optimistic Update - Kullanıcıyı bekletme, UI'ı hemen güncelle
+            val originalUser = _uiState.value.user
+            _uiState.update { it.copy(user = user, isLoading = true, error = null) }
 
             when (val result = authRepository.updateUserProfile(user)) {
                 is Result.Success -> {
-                    // Data is already updated, do nothing or show a success message
+                    _uiState.update { it.copy(isLoading = false) }
                 }
                 is Result.Error -> {
-                    // Revert the change on error and show a message
-                    loadCurrentUser() // Re-fetch the original state
-                    _uiState.update { it.copy(error = "Profile update failed.") }
+                    // Standart 3: Resilience - Hata anında veriyi eski haline çek (Rollback)
+                    _uiState.update { 
+                        it.copy(
+                            user = originalUser, 
+                            isLoading = false, 
+                            error = result.error.message // Kara kutu kırıldı: Gerçek hata mesajı iletiliyor
+                        ) 
+                    }
                 }
-                else -> {}
+                else -> { _uiState.update { it.copy(isLoading = false) } }
             }
         }
     }
 
     fun onLogoutClicked() {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
-            when (authRepository.logout()) {
+            _uiState.update { it.copy(isLoading = true, error = null) }
+            when (val result = authRepository.logout()) {
                 is Result.Success -> {
                     _uiState.update { it.copy(isLoading = false, isLoggedOut = true) }
                 }
                 is Result.Error -> {
-                    _uiState.update { it.copy(isLoading = false, error = "Logout failed. Please try again.") }
+                    // Şeffaf Hata Yönetimi: Sabit metin yerine gerçek AppError mesajı
+                    _uiState.update { 
+                        it.copy(
+                            isLoading = false, 
+                            error = result.error.message 
+                        ) 
+                    }
                 }
-                else -> { /* No-op */ }
+                else -> { _uiState.update { it.copy(isLoading = false) } }
             }
         }
     }

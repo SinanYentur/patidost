@@ -9,13 +9,15 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.patidost.app.feature.auth.AuthScreen
+import com.patidost.app.feature.economy.EconomyScreen
 import com.patidost.app.feature.pet_detail.PetDetailScreen
 import com.patidost.app.ui.main.MainScreen
 
 object AppDestinations {
     const val AUTH_GRAPH_ROUTE = "auth_graph"
     const val MAIN_GRAPH_ROUTE = "main_graph"
-    const val PET_DETAIL_ROUTE = "pet_detail" // ADDED
+    const val PET_DETAIL_ROUTE = "pet_detail"
+    const val ECONOMY_ROUTE = "economy" // EKLEME: Ekonomi rotası mühürlendi
 }
 
 object GraphDestinations {
@@ -50,8 +52,12 @@ fun AppNavGraph() {
             composable(
                 route = "${AppDestinations.PET_DETAIL_ROUTE}/{${PetDetailArgs.PET_ID}}",
                 arguments = listOf(navArgument(PetDetailArgs.PET_ID) { type = NavType.StringType })
-            ) {
+            )
+            {
                 PetDetailScreen()
+            }
+            composable(AppDestinations.ECONOMY_ROUTE) {
+                EconomyScreen()
             }
         }
     }
@@ -59,7 +65,7 @@ fun AppNavGraph() {
 
 fun NavHostController.navigateToMainGraph() {
     navigate(AppDestinations.MAIN_GRAPH_ROUTE) {
-        popUpTo(graph.startDestinationId) {
+        popUpTo(AppDestinations.AUTH_GRAPH_ROUTE) {
             inclusive = true
         }
         launchSingleTop = true

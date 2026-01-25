@@ -9,13 +9,8 @@ java {
 }
 
 dependencies {
-    // Coroutines
     implementation(libs.kotlinx.coroutines.core)
-
-    // JSR-330 for @Inject annotation
-    implementation("javax.inject:javax.inject:1")
-
-    // Testing
+    implementation(libs.javax.inject)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)

@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 rootProject.name = "PatiDost"
 include(":app")
 include(":core")
+include(":core:ui")
 include(":domain")
 include(":data")
 

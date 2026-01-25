@@ -1,5 +1,6 @@
 package com.patidost.app.feature.discovery
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -18,11 +19,18 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.patidost.app.domain.model.Pet
-import com.patidost.app.feature.discovery.R
 
 @Composable
-fun PetCard(pet: Pet, modifier: Modifier = Modifier) {
-    Card(modifier = modifier) {
+fun PetCard(
+    pet: Pet,
+    modifier: Modifier = Modifier,
+    onItemClick: () -> Unit // YENİ: Tıklama aksiyonu
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onItemClick() } // YENİ: Kartı tıklanabilir yapıyoruz
+    ) {
         Column {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -35,14 +43,22 @@ fun PetCard(pet: Pet, modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .aspectRatio(1f)
             )
-
-            Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(text = pet.name, style = MaterialTheme.typography.headlineSmall)
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
                 Text(
-                    text = stringResource(id = R.string.discovery_pet_age_format, pet.age),
+                    text = "${pet.name}, ${pet.age}",
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                Text(
+                    text = pet.breed,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                Text(
+                    text = pet.location,
                     style = MaterialTheme.typography.bodyMedium
                 )
-                Text(text = pet.location, style = MaterialTheme.typography.bodySmall)
             }
         }
     }
@@ -59,5 +75,5 @@ private fun PetCardPreview() {
         imageUrl = "https://example.com/simon.jpg", // Placeholder URL
         location = "Istanbul, Turkey"
     )
-    PetCard(pet = samplePet)
+    PetCard(pet = samplePet, onItemClick = {})
 }

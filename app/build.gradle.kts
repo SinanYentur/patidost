@@ -2,10 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.detekt)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -35,40 +34,42 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.11"
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
         }
     }
 }
 
 dependencies {
-
     implementation(project(":core"))
+    implementation(project(":core:ui"))
     implementation(project(":domain"))
     implementation(project(":data"))
 
-    // Feature Modules
+    // Features
     implementation(project(":feature:auth"))
     implementation(project(":feature:feed"))
     implementation(project(":feature:profile"))
     implementation(project(":feature:pet_detail"))
     implementation(project(":feature:discovery"))
     implementation(project(":feature:economy"))
-    implementation(project(":feature:liked_pets")) // ADDED
+    implementation(project(":feature:liked_pets"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -78,40 +79,22 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.google.android.material)
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
+    implementation("androidx.hilt:hilt-work:1.2.0")
+    ksp("androidx.hilt:hilt-compiler:1.2.0")
 
-    // Navigation
     implementation(libs.androidx.navigation.compose)
-
-    // Logging
     implementation(libs.timber)
 
-    // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
-    implementation(libs.firebase.auth) // Added auth dependency
+    implementation(libs.firebase.auth)
+    implementation(libs.play.services.auth)
 
-    // Testing
-    testImplementation(libs.junit)
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
 }
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
-}
-
-detekt {
-    config.setFrom(rootProject.files("detekt.yml"))
-}
-

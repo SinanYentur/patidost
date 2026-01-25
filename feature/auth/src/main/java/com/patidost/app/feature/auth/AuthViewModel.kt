@@ -51,6 +51,38 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    fun onRegisterWithEmailClicked() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, error = null) }
+
+            // Repository'deki yeni aktif ettiğimiz register fonksiyonunu çağırıyoruz
+            when (val result = authRepository.registerWithEmail(uiState.value.email, uiState.value.password)) {
+                is Result.Success -> {
+                    _uiState.update { it.copy(isLoading = false, isLoginSuccessful = true) }
+                }
+                is Result.Error -> {
+                    _uiState.update { it.copy(isLoading = false, error = result.error.message) }
+                }
+                else -> {}
+            }
+        }
+    }
+
+    fun onSignInWithGoogle(idToken: String) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, error = null) }
+            when (val result = authRepository.signInWithGoogle(idToken)) {
+                is Result.Success -> {
+                    _uiState.update { it.copy(isLoading = false, isLoginSuccessful = true) }
+                }
+                is Result.Error -> {
+                    _uiState.update { it.copy(isLoading = false, error = result.error.message) }
+                }
+                is Result.Loading -> { /* Handled by initial isLoading update */ }
+            }
+        }
+    }
+
     /**
      * Called by the UI after the navigation event has been handled.
      */

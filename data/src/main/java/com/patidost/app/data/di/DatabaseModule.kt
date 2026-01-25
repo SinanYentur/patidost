@@ -3,7 +3,7 @@ package com.patidost.app.data.di
 import android.content.Context
 import androidx.room.Room
 import com.patidost.app.data.local.AppDatabase
-import com.patidost.app.data.local.LikedPetDao
+import com.patidost.app.data.local.dao.LikedPetDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,16 +17,17 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "patidost_database"
-        ).build()
+            "patidost_db"
+        )
+        .build()
     }
 
     @Provides
-    fun provideLikedPetDao(appDatabase: AppDatabase): LikedPetDao {
-        return appDatabase.likedPetDao()
+    fun provideLikedPetDao(database: AppDatabase): LikedPetDao {
+        return database.likedPetDao()
     }
 }

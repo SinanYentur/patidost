@@ -35,9 +35,17 @@ fun MainScreen(mainNavController: NavHostController) {
             startDestination = MainNavigationItem.Discovery.route,
             modifier = Modifier.padding(innerPadding)
         ) {
+            // --- OPERASYON TAMAMLANDI: BAĞLANTI KURULDU ---
             composable(MainNavigationItem.Discovery.route) {
-                DiscoveryScreen()
+                DiscoveryScreen(
+                    onPetClick = { petId ->
+                        // ARTIK DISCOVERY EKRANINDAN DETAY SAYFASINA GİDİLEBİLİR
+                        mainNavController.navigate("${AppDestinations.PET_DETAIL_ROUTE}/$petId")
+                    }
+                )
             }
+            // ---------------------------------------------
+
             composable(MainNavigationItem.LikedPets.route) {
                 LikedPetsScreen(
                     onPetClick = { petId ->

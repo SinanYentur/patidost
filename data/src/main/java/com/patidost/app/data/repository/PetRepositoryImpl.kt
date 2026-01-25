@@ -1,7 +1,7 @@
 package com.patidost.app.data.repository
 
-import com.patidost.app.data.local.LikedPetDao
-import com.patidost.app.data.local.LikedPetEntity
+import com.patidost.app.data.local.dao.LikedPetDao
+import com.patidost.app.data.local.entity.LikedPetEntity
 import com.patidost.app.domain.model.Pet
 import com.patidost.app.domain.repository.PetRepository
 import com.patidost.app.domain.utils.AppError
