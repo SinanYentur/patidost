@@ -168,3 +168,6 @@ Bu liste, `find_files` komutuyla bulunan tüm kritik dosyaları içerir ve proje
 ./sprints/sprint_1/tasks.md
 
 ## 📌 OTOMATİK PIN ENVANTERİ — SONU
+
+### 📌 EK ANAYASAL PROTOKOLLER
+.constitution/ANAYASAL_EK_PROTOKOL.md
