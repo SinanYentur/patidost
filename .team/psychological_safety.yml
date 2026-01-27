@@ -1,0 +1,40 @@
+
+# TEAM PSYCHOLOGICAL SAFETY MONITORING
+# This file defines the metrics and protocols for ensuring team well-being. It is a leading indicator of project success.
+# Automated alerts are sent to the Project Steward if thresholds are breached.
+
+version: "1.0"
+
+metrics:
+  burnout_indicators:
+    metric: "BURNOUT_RISK_SCORE"
+    description: "A composite score indicating the risk of team burnout. Calculated weekly."
+    data_sources:
+      - source: "GIT_COMMIT_PATTERNS"
+        description: "Analyzes commit frequency, size, and after-hours activity."
+        weight: 0.5
+      - source: "CI_CD_FAILURE_RATE"
+        description: "High failure rates can indicate team stress or technical friction."
+        weight: 0.3
+      - source: "ANONYMOUS_FEEDBACK_SENTIMENT"
+        description: "Sentiment analysis of weekly anonymous feedback."
+        weight: 0.2
+    alert_thresholds:
+      - level: "WARNING"
+        condition: "score > 0.6"
+        action: "send_warning_to_steward"
+        message: "Warning: Burnout risk score is high. Review recent activity."
+      - level: "CRITICAL"
+        condition: "score > 0.8"
+        action: "trigger_intervention_protocol"
+        message: "CRITICAL: Burnout risk score is critical. Immediate intervention required."
+
+  psychological_safety_index:
+    metric: "PSYCH_SAFETY_INDEX"
+    description: "Measured via a bi-weekly, anonymous 7-question survey."
+    improvement_target: "index > 0.85"
+    alert_thresholds:
+      - level: "WARNING"
+        condition: "index < 0.75"
+        action: "send_warning_to_steward"
+        message: "Warning: Psychological Safety Index is dropping. Review team dynamics."

@@ -1,0 +1,16 @@
+#!/bin/sh
+# ANAYASAL KAPI: PRE-PUSH
+# Bu script, her push öncesi çalışır ve en geniş kapsamlı mimari denetimi tetikler.
+
+echo "[DENETÇİ] Pre-push denetimi başlatıldı..."
+
+# Tam bir build ve test döngüsü çalıştır.
+./scripts/anayasa_build_check.sh --mode full_check
+
+if [ $? -ne 0 ]; then
+    echo "[DENETÇİ] 🚨 KRİTİK ANAYASAL İHLAL: Tam sistem denetimi başarısız. PUSH ENGELLENDİ." >&2
+    exit 1
+fi
+
+echo "[DENETÇİ] Tam sistem denetimi başarılı. Push işlemine izin verildi."
+exit 0

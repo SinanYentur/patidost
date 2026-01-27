@@ -1,0 +1,44 @@
+
+# SUSTAINABILITY METRICS & TRACKING
+# This file defines how the project measures and mitigates its environmental impact.
+# It is a core component of our engineering principles.
+
+version: "1.0"
+
+environmental_metrics:
+  carbon_footprint:
+    description: "Estimated carbon footprint of the application's lifecycle."
+    components:
+      - component: "SERVER_ENERGY"
+        description: "Energy consumed by backend services."
+        calculation: "(number_of_requests * energy_per_request_joules) * grid_carbon_intensity_gco2_per_joule"
+        tracking_tool: "CI/CD_integrated_profiler"
+        reduction_target: "-15%_per_year"
+
+      - component: "DEVICE_ENERGY"
+        description: "Energy consumed by the app on user devices."
+        calculation: "avg_session_energy_joules * daily_active_users * 365"
+        tracking_tool: "Android_Battery_Historian_sampling"
+        reduction_target: "-20%_per_year"
+
+      - component: "DATA_TRANSFER"
+        description: "Energy consumed by transferring data over the network."
+        calculation: "total_data_transferred_gb * network_energy_factor_kwh_per_gb"
+        tracking_tool: "Network_profiler_in_CI"
+        reduction_target: "-30%_per_year"
+
+    reporting:
+      - frequency: "quarterly"
+        channel: "engineering_team_meeting"
+        report_owner: "Project_Steward"
+
+  green_coding_standards:
+    description: "A set of rules enforced by static analysis to promote energy-efficient code."
+    validator_script: ".sustainability/validators/validate_green_coding.sh"
+    rules:
+      - rule: "AVOID_UNNECESSARY_IMAGE_SCALING"
+        description: "Load images at the required size to avoid client-side processing."
+      - rule: "OPTIMIZE_DATA_SERIALIZATION"
+        description: "Use efficient formats like Protobuf or a well-configured Moshi."
+      - rule: "BATCH_NETWORK_REQUESTS"
+        description: "Avoid opening and closing network connections unnecessarily."

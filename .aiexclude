@@ -1,0 +1,6 @@
+# AI EXCLUSION RULES
+# This file defines which files and directories are ignored by the AI.
+# This is a security and performance measure.
+
+# Allow access to the constitution
+!/anayasaglobal

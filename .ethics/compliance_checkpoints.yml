@@ -1,0 +1,46 @@
+
+# ETHICAL COMPLIANCE AUTOMATION
+# This file is the project's conscience. It is immutable and enforced by the CI/CD pipeline.
+# Do not edit manually. Changes must be approved by the Ethics Board (Project Steward).
+
+version: "1.0"
+
+ethical_gates:
+  privacy_by_design:
+    checkpoint: "PRIVACY_CHECKPOINT_1"
+    phase: "Design & Development"
+    description: "Ensures that data collection is minimal and user consent is explicit."
+    requirements:
+      - requirement: "DATA_MINIMIZATION_IMPLEMENTED"
+        validation_script: ".ethics/validators/validate_data_minimization.sh"
+        error_message: "Violation: Non-essential user or pet data is being collected."
+      - requirement: "CONSENT_MECHANISM_DESIGNED"
+        validation_script: ".ethics/validators/validate_consent_design.sh"
+        error_message: "Violation: User consent is not explicit, granular, and easily revocable."
+    blocking: true
+
+  bias_detection:
+    checkpoint: "BIAS_CHECKPOINT_1"
+    phase: "Development & Testing"
+    description: "Prevents algorithmic bias in features like pet matching or image analysis."
+    requirements:
+      - requirement: "MODEL_FAIRNESS_TESTING"
+        validation_script: ".ethics/validators/validate_model_fairness.sh"
+        error_message: "Violation: The matching algorithm shows significant bias towards certain breeds or locations."
+      - requirement: "ACCESSIBILITY_COMPLIANCE_WCAG_2_1_AA"
+        validation_script: ".ethics/validators/validate_accessibility.sh"
+        error_message: "Violation: The UI does not meet WCAG 2.1 AA standards for accessibility."
+    blocking: true
+
+  dark_pattern_prevention:
+    checkpoint: "DARK_PATTERN_CHECKPOINT"
+    phase: "UX/UI Review"
+    description: "Prohibits manipulative user interface designs."
+    requirements:
+      - requirement: "NO_CONFIRM_SHAMING"
+        validation_script: ".ethics/validators/validate_no_confirm_shaming.sh"
+        error_message: "Violation: The UI uses confirm-shaming to manipulate user choices."
+      - requirement: "OPT_OUT_EQUAL_EFFORT"
+        validation_script: ".ethics/validators/validate_opt_out_ease.sh"
+        error_message: "Violation: Opting out of a feature is significantly harder than opting in."
+    blocking: true

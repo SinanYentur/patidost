@@ -1,0 +1,16 @@
+#!/bin/sh
+# ANAYASAL KAPI: PRE-COMMIT
+# Bu script, her commit öncesi çalışır ve Denetçi'nin Seviye 2 alarmlarını tetikler.
+
+echo "[DENETÇİ] Pre-commit denetimi başlatıldı..."
+
+# Anayasal denetim script'ini çalıştır.
+./constitutional_audit.sh
+
+if [ $? -ne 0 ]; then
+    echo "[DENETÇİ] 🚨 ANAYASAL İHLAL TESPİT EDİLDİ. COMMIT ENGELLENDİ." >&2
+    exit 1
+fi
+
+echo "[DENETÇİ] Anayasal uyum doğrulandı. Commit işlemine izin verildi."
+exit 0

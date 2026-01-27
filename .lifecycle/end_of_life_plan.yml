@@ -1,0 +1,41 @@
+
+# POST-LAUNCH & LIFECYCLE MANAGEMENT
+# This plan ensures the project has a managed lifecycle, preventing it from becoming abandonware.
+# It is a promise to our users and our future selves.
+
+version: "1.0"
+
+lifecycle_phases:
+  active_maintenance:
+    duration: "Minimum 2 years post-last-major-release"
+    description: "The period during which the product receives new features, bug fixes, and security patches."
+    requirements:
+      - "Security patches within 30 days of vulnerability disclosure."
+      - "Critical bug fixes within 14 days of confirmation."
+      - "Compatibility updates for new OS versions within 90 days of official release."
+
+  security_maintenance:
+    duration: "Additional 1 year after Active Maintenance ends."
+    description: "The product receives only critical security patches. No new features or minor bug fixes."
+    requirements:
+      - "Critical security patches only."
+      - "Public announcement of transition to this phase."
+
+  end_of_life:
+    timeline:
+      - event: "Public EOL Announcement"
+        timing: "12 months prior to service termination"
+      - event: "New User Sign-ups Disabled"
+        timing: "6 months prior to service termination"
+      - event: "Service Termination"
+        timing: "The final date of operation"
+    migration_support:
+      - tool: "USER_DATA_EXPORT_TOOL"
+        description: "A simple, one-click tool for users to download all their data in a standard format (JSON)."
+        availability: "Must be available from EOL announcement until 6 months after termination."
+      - documentation: "MIGRATION_GUIDE"
+        description: "A clear guide on how to use the export tool and what to do with the data."
+        availability: "Permanently available on the company website."
+    archive_strategy:
+      - repository: "The full source code and commit history will be archived in a private, read-only repository."
+      - database: "Anonymized user data will be archived for analytical purposes, in compliance with privacy policies."

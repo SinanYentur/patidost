@@ -1,0 +1,17 @@
+#!/bin/sh
+# ANAYASAL KAPI: COMMIT-MSG
+# Bu script, her commit mesajının Conventional Commits formatına uymasını zorunlu kılar.
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat $COMMIT_MSG_FILE)
+
+# Regex for Conventional Commits: type(scope): subject
+CONVENTIONAL_COMMIT_REGEX="^(feat|fix|build|chore|ci|docs|perf|refactor|revert|style|test)(\([a-zA-Z0-9\s\-]+\))?!?: .+"
+
+if ! echo "$COMMIT_MSG" | grep -qE "$CONVENTIONAL_COMMIT_REGEX"; then
+    echo "[DENETÇİ] 🚨 ANAYASAL İHLAL: Commit mesajı Conventional Commits formatına uymuyor." >&2
+    echo "[DENETÇİ] Lütfen 'feat(login): Add email validation' gibi bir format kullanın." >&2
+    exit 1
+fi
+
+exit 0
