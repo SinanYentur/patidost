@@ -18,7 +18,7 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("hilt.android").get())
                 add("ksp", libs.findLibrary("hilt.compiler").get())
 
-                // ANAYASAL EKLEME: Hilt ViewModel kullanan her modülün bunlara ihtiyacı vardır.
+                // ANAYASAL ONARIM: Hilt ViewModel kullanan her modülün bunlara ihtiyacı vardır.
                 add("implementation", libs.findLibrary("androidx.lifecycle.runtime.ktx").get()) // viewModelScope için
                 add("implementation", libs.findLibrary("hilt.navigation.compose").get()) // hiltViewModel() için
             }

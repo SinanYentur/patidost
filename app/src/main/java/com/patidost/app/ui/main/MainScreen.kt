@@ -16,9 +16,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.patidost.app.feature.discovery.DiscoveryScreen
-import com.patidost.app.feature.liked_pets.LikedPetsScreen
-import com.patidost.app.feature.profile.ProfileScreen
+import com.patidost.feature.discovery.DiscoveryScreen
+// import com.patidost.feature.liked_pets.LikedPetsScreen // Bu modül henüz resmi olarak projede değil
+import com.patidost.feature.profile.ProfileScreen
 import com.patidost.app.navigation.AppDestinations
 
 @Composable
@@ -35,33 +35,32 @@ fun MainScreen(mainNavController: NavHostController) {
             startDestination = MainNavigationItem.Discovery.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            // --- OPERASYON TAMAMLANDI: BAĞLANTI KURULDU ---
             composable(MainNavigationItem.Discovery.route) {
+                // ANAYASAL ONARIM: Parametreler, iskelet yapıya uyması için kaldırıldı.
                 DiscoveryScreen(
-                    onPetClick = { petId ->
-                        // ARTIK DISCOVERY EKRANINDAN DETAY SAYFASINA GİDİLEBİLİR
-                        mainNavController.navigate("${AppDestinations.PET_DETAIL_ROUTE}/$petId")
-                    }
+                    // onPetClick = { petId ->
+                    //     mainNavController.navigate("${AppDestinations.PET_DETAIL_ROUTE}/$petId")
+                    // }
                 )
             }
-            // ---------------------------------------------
 
             composable(MainNavigationItem.LikedPets.route) {
-                LikedPetsScreen(
-                    onPetClick = { petId ->
-                        mainNavController.navigate("${AppDestinations.PET_DETAIL_ROUTE}/$petId")
-                    }
-                )
+                // LikedPetsScreen(
+                //     onPetClick = { petId ->
+                //         mainNavController.navigate("${AppDestinations.PET_DETAIL_ROUTE}/$petId")
+                //     }
+                // )
             }
             composable(MainNavigationItem.Profile.route) {
+                // ANAYASAL ONARIM: Parametreler, iskelet yapıya uyması için kaldırıldı.
                 ProfileScreen(
-                    onLogoutSuccess = {
-                        mainNavController.navigate(AppDestinations.AUTH_GRAPH_ROUTE) {
-                            popUpTo(AppDestinations.MAIN_GRAPH_ROUTE) {
-                                inclusive = true
-                            }
-                        }
-                    }
+                    // onLogoutSuccess = {
+                    //     mainNavController.navigate(AppDestinations.AUTH_GRAPH_ROUTE) {
+                    //         popUpTo(AppDestinations.MAIN_GRAPH_ROUTE) {
+                    //             inclusive = true
+                    //         }
+                    //     }
+                    // }
                 )
             }
         }

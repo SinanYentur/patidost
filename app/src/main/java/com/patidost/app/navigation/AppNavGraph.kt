@@ -8,10 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.patidost.app.feature.auth.AuthScreen
-import com.patidost.app.feature.economy.EconomyScreen
-import com.patidost.app.feature.onboarding.ui.OnboardingScreen
-import com.patidost.app.feature.pet_detail.PetDetailScreen
+import com.patidost.feature.auth.AuthScreen
+import com.patidost.feature.pet_detail.PetDetailScreen
 import com.patidost.app.ui.main.MainScreen
 
 object AppDestinations {
@@ -30,17 +28,14 @@ fun AppNavGraph() {
 
         composable(AppDestinations.AUTH_GRAPH_ROUTE) {
             AuthScreen(
-                // In a real app, the ViewModel would trigger a navigation event
-                // which would be collected here to navigate.
-                // For now, we'll simulate a successful login to navigate to onboarding.
                 // onLoginSuccess = { navController.navigateToOnboarding() }
             )
         }
 
         composable(AppDestinations.ONBOARDING_ROUTE) {
-            OnboardingScreen(
-                onNavigateToHome = { navController.navigateToMainGraph() }
-            )
+            // OnboardingScreen(
+            //     onNavigateToHome = { navController.navigateToMainGraph() }
+            // )
         }
 
         navigation(startDestination = "main_screen_route_placeholder", route = AppDestinations.MAIN_GRAPH_ROUTE) {
@@ -55,7 +50,7 @@ fun AppNavGraph() {
                 PetDetailScreen()
             }
             composable(AppDestinations.ECONOMY_ROUTE) {
-                EconomyScreen()
+                // EconomyScreen()
             }
         }
     }
@@ -71,8 +66,8 @@ fun NavHostController.navigateToOnboarding() {
 }
 
 fun NavHostController.navigateToMainGraph() {
-    navigate(AppDestinations.MAIN_GRAPH_ROUTE) {
-        popUpTo(AppDestinations.ONBOARDING_ROUTE) {
+    navigate(AppDestinations.ONBOARDING_ROUTE) {
+        popUpTo(AppDestinations.MAIN_GRAPH_ROUTE) {
             inclusive = true
         }
         launchSingleTop = true

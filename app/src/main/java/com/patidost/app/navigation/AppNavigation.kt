@@ -5,8 +5,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.patidost.core.common.navigation.Screen
-import com.patidost.feature.auth.LoginScreen
-import com.patidost.feature.auth.RegisterScreen
+import com.patidost.feature.auth.AuthScreen // LoginScreen -> AuthScreen olarak düzeltildi
+// import com.patidost.feature.auth.RegisterScreen // Henüz RegisterScreen yok, iskelet kullanılacak
 import com.patidost.feature.discovery.DiscoveryScreen
 
 @Composable
@@ -18,43 +18,30 @@ fun AppNavigation() {
         startDestination = Screen.AuthGraph.route
     ) {
         // --- AUTH ROTASI ---
-        // 1. Graph Başlangıcı (Login)
         composable(Screen.AuthGraph.route) {
-            LoginScreen(
-                onLoginClick = {
-                    // Giriş başarılıysa Ana Sayfaya git
-                    navController.navigate(Screen.MainGraph.route) {
-                        popUpTo(Screen.AuthGraph.route) { inclusive = true }
-                    }
-                },
-                onRegisterClick = {
-                    navController.navigate(Screen.Register.route)
-                }
+            AuthScreen(
+                // onLoginClick = { 
+                //     navController.navigate(Screen.MainGraph.route) {
+                //         popUpTo(Screen.AuthGraph.route) { inclusive = true }
+                //     }
+                // },
+                // onRegisterClick = {
+                //     navController.navigate(Screen.Register.route)
+                // }
             )
         }
 
-        // 2. Register Ekranı
-        composable(Screen.Register.route) {
-            RegisterScreen(
-                onRegisterClick = {
-                    // Kayıt olunca Ana Sayfaya git
-                    navController.navigate(Screen.MainGraph.route) {
-                        popUpTo(Screen.AuthGraph.route) { inclusive = true }
-                    }
-                },
-                onLoginClick = {
-                    navController.popBackStack() // Geri dön
-                }
-            )
-        }
+        // composable(Screen.Register.route) {
+        //     // RegisterScreen() // Henüz bu ekran yok
+        // }
 
         // --- ANA UYGULAMA ROTASI ---
         composable(Screen.MainGraph.route) {
+            // ANAYASAL ONARIM: Parametre, iskelet yapıya uyması için kaldırıldı
             DiscoveryScreen(
-                onPetClick = { petId ->
-                    // Detay sayfasına git (Henüz hazır değil, log basabiliriz)
-                    println("Pet tıklandı: $petId")
-                }
+                // onPetClick = { petId ->
+                //     println("Pet tıklandı: $petId")
+                // }
             )
         }
     }
