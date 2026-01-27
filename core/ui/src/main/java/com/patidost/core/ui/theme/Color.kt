@@ -2,10 +2,24 @@ package com.patidost.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// A+++ VIBRANT PET PALETTE (2026 Trend)
+// Sıcak, Enerjik, Güvenilir
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val PrimaryOrange = Color(0xFFFF6F00) // Canlı Turuncu (Pati Enerjisi)
+val PrimaryAmber = Color(0xFFFFB300)  // Güneş Sarısı
+val SecondaryTeal = Color(0xFF009688) // Doğal Teal (Güven)
+val SecondaryBlue = Color(0xFF0288D1)
+
+val NeutralDark = Color(0xFF212121)   // Yumuşak Siyah
+val NeutralGrey = Color(0xFF757575)
+val BackgroundLight = Color(0xFFFFF8E1) // Çok açık krem (Göz yormayan beyaz)
+val SurfaceWhite = Color(0xFFFFFFFF)
+
+val ErrorRed = Color(0xFFD32F2F)
+val SuccessGreen = Color(0xFF388E3C)
+
+// Dark Mode Colors
+val PrimaryOrangeDark = Color(0xFFFFD180)
+val SecondaryTealDark = Color(0xFF80CBC4)
+val BackgroundDark = Color(0xFF121212)
+val SurfaceDark = Color(0xFF1E1E1E)

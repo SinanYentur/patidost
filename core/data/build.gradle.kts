@@ -8,15 +8,13 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.domain)
-    implementation(projects.core.common)
+    implementation(project(":core:domain"))
+    implementation(project(":core:common"))
     
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
     
     implementation(libs.datastore.preferences)
-    
-    // JSON parse işlemleri için (Mock data)
     implementation(libs.retrofit.gson)
 }

@@ -1,16 +1,28 @@
-#!/bin/sh
-# ANAYASAL KAPI: PRE-COMMIT
-# Bu script, her commit öncesi çalışır ve Denetçi'nin Seviye 2 alarmlarını tetikler.
+#!/bin/bash
+# ANKARA-OS v8.0 PRE-COMMIT HOOK
+# Bu dosya Anayasa'nın fiziksel koruyucusudur.
 
-echo "[DENETÇİ] Pre-commit denetimi başlatıldı..."
+echo "🔒 ANKARA-OS v8.0 DENETÇİSİ DEVREDE..."
 
-# Anayasal denetim script'ini çalıştır.
-./constitutional_audit.sh
-
-if [ $? -ne 0 ]; then
-    echo "[DENETÇİ] 🚨 ANAYASAL İHLAL TESPİT EDİLDİ. COMMIT ENGELLENDİ." >&2
+# KURAL 1: Anayasa Versiyon Kontrolü
+if ! grep -q "VERSION: 8.0" docs/CORE_CONSTITUTION.md; then
+    echo "❌ HATA: Anayasa versiyonu (v8.0) doğrulanamadı veya dosya bozuk."
     exit 1
 fi
 
-echo "[DENETÇİ] Anayasal uyum doğrulandı. Commit işlemine izin verildi."
+# KURAL 2: Mimari Onay Kontrolü
+if ! grep -q "İNSAN ONAYI:" docs/ARCHITECTURE_LOG.md; then
+    echo "❌ HATA: Mimari kararlar (docs/ARCHITECTURE_LOG.md) İnsan tarafından onaylanmamış."
+    exit 1
+fi
+
+# KURAL 3: Hardcoded Secret Taraması (Basit)
+# "password", "api_key" gibi kelimeleri kaynak kodda arar.
+if grep -rE "password\s*=|api_key\s*=|private_key\s*=" app/src/main/java; then
+    echo "❌ HATA: Kod içinde hardcoded secret (şifre/anahtar) tespit edildi."
+    echo "   Lütfen BuildConfig veya local.properties kullanın."
+    exit 1
+fi
+
+echo "✅ TÜM ANAYASAL KONTROLLER BAŞARILI. Commit onaylandı."
 exit 0

@@ -10,48 +10,46 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.patidost.app.feature.auth.AuthScreen
 import com.patidost.app.feature.economy.EconomyScreen
+import com.patidost.app.feature.onboarding.ui.OnboardingScreen
 import com.patidost.app.feature.pet_detail.PetDetailScreen
 import com.patidost.app.ui.main.MainScreen
 
 object AppDestinations {
     const val AUTH_GRAPH_ROUTE = "auth_graph"
+    const val ONBOARDING_ROUTE = "onboarding"
     const val MAIN_GRAPH_ROUTE = "main_graph"
     const val PET_DETAIL_ROUTE = "pet_detail"
-    const val ECONOMY_ROUTE = "economy" // EKLEME: Ekonomi rotası mühürlendi
-}
-
-object GraphDestinations {
-    const val AUTH_SCREEN_ROUTE = "auth"
-    const val MAIN_SCREEN_ROUTE = "main_screen"
-}
-
-object PetDetailArgs {
-    const val PET_ID = "petId"
+    const val ECONOMY_ROUTE = "economy"
 }
 
 @Composable
 fun AppNavGraph() {
     val navController = rememberNavController()
-    // TODO: Add a real logic to decide the start destination based on user login state.
+    
     NavHost(navController = navController, startDestination = AppDestinations.AUTH_GRAPH_ROUTE) {
 
-        navigation(startDestination = GraphDestinations.AUTH_SCREEN_ROUTE, route = AppDestinations.AUTH_GRAPH_ROUTE) {
-            composable(GraphDestinations.AUTH_SCREEN_ROUTE) {
-                AuthScreen(
-                    onLoginSuccess = {
-                        navController.navigateToMainGraph()
-                    }
-                )
-            }
+        composable(AppDestinations.AUTH_GRAPH_ROUTE) {
+            AuthScreen(
+                // In a real app, the ViewModel would trigger a navigation event
+                // which would be collected here to navigate.
+                // For now, we'll simulate a successful login to navigate to onboarding.
+                // onLoginSuccess = { navController.navigateToOnboarding() }
+            )
         }
 
-        navigation(startDestination = GraphDestinations.MAIN_SCREEN_ROUTE, route = AppDestinations.MAIN_GRAPH_ROUTE) {
-            composable(GraphDestinations.MAIN_SCREEN_ROUTE) {
+        composable(AppDestinations.ONBOARDING_ROUTE) {
+            OnboardingScreen(
+                onNavigateToHome = { navController.navigateToMainGraph() }
+            )
+        }
+
+        navigation(startDestination = "main_screen_route_placeholder", route = AppDestinations.MAIN_GRAPH_ROUTE) {
+            composable("main_screen_route_placeholder") {
                 MainScreen(mainNavController = navController)
             }
             composable(
-                route = "${AppDestinations.PET_DETAIL_ROUTE}/{${PetDetailArgs.PET_ID}}",
-                arguments = listOf(navArgument(PetDetailArgs.PET_ID) { type = NavType.StringType })
+                route = "${AppDestinations.PET_DETAIL_ROUTE}/{petId}",
+                arguments = listOf(navArgument("petId") { type = NavType.StringType })
             )
             {
                 PetDetailScreen()
@@ -63,9 +61,18 @@ fun AppNavGraph() {
     }
 }
 
+fun NavHostController.navigateToOnboarding() {
+    navigate(AppDestinations.ONBOARDING_ROUTE) {
+        popUpTo(AppDestinations.AUTH_GRAPH_ROUTE) {
+            inclusive = true
+        }
+        launchSingleTop = true
+    }
+}
+
 fun NavHostController.navigateToMainGraph() {
     navigate(AppDestinations.MAIN_GRAPH_ROUTE) {
-        popUpTo(AppDestinations.AUTH_GRAPH_ROUTE) {
+        popUpTo(AppDestinations.ONBOARDING_ROUTE) {
             inclusive = true
         }
         launchSingleTop = true

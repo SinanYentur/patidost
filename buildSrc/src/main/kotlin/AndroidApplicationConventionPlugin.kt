@@ -2,22 +2,38 @@ import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.api.JavaVersion
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("com.android.application")
-            pluginManager.apply("org.jetbrains.kotlin.android")
+            with(pluginManager) {
+                apply("com.android.application")
+                apply("org.jetbrains.kotlin.android")
+            }
 
             extensions.configure<ApplicationExtension> {
-                defaultConfig {
-                    targetSdk = 34
-                }
                 compileSdk = 34
+                
+                defaultConfig {
+                    minSdk = 26
+                    targetSdk = 34
+                    versionCode = 1
+                    versionName = "1.0"
+                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+                    vectorDrawables.useSupportLibrary = true
+                }
 
                 compileOptions {
-                    sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
-                    targetCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
+                    // MODERN STANDART: JAVA 17
+                    sourceCompatibility = JavaVersion.VERSION_17
+                    targetCompatibility = JavaVersion.VERSION_17
+                }
+                
+                tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).configureEach {
+                    kotlinOptions {
+                        jvmTarget = "17"
+                    }
                 }
             }
         }

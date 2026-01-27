@@ -16,21 +16,35 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = PrimaryOrangeDark,
+    onPrimary = NeutralDark,
+    secondary = SecondaryTealDark,
+    onSecondary = NeutralDark,
+    background = BackgroundDark,
+    surface = SurfaceDark,
+    onBackground = SurfaceWhite,
+    onSurface = SurfaceWhite
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = PrimaryOrange,
+    onPrimary = SurfaceWhite,
+    secondary = SecondaryTeal,
+    onSecondary = SurfaceWhite,
+    background = BackgroundLight,
+    surface = SurfaceWhite,
+    onBackground = NeutralDark,
+    onSurface = NeutralDark,
+    error = ErrorRed
 )
 
 @Composable
 fun PatiDostTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    // Dynamic color A+++ tasarımda bazen marka kimliğini bozar. 
+    // PatiDost kimliğini korumak için varsayılan olarak kapalı tutuyoruz, 
+    // kullanıcı isterse açabilir.
+    dynamicColor: Boolean = false, 
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -46,7 +60,7 @@ fun PatiDostTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }
 

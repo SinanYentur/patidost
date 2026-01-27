@@ -1,4 +1,3 @@
-
 pluginManagement {
     repositories {
         google()
@@ -16,16 +15,11 @@ dependencyResolutionManagement {
 
 rootProject.name = "PatiDost"
 include(":app")
-include(":core")
 include(":core:ui")
-include(":domain")
-include(":data")
-
-// Feature Modules
+include(":core:data")
+include(":core:domain")
+include(":core:common")
 include(":feature:auth")
-include(":feature:feed")
-include(":feature:profile")
-include(":feature:pet_detail")
 include(":feature:discovery")
-include(":feature:economy")
-include(":feature:liked_pets") // ADDED
+include(":feature:pet_detail")
+include(":feature:profile")

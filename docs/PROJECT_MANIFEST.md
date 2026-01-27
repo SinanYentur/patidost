@@ -1,24 +1,26 @@
-# PROJE MANİFESTOSU
+# PROJE MANİFESTOSU (PatiDost)
 
-## TEMEL BİLGİLER
-- **Proje Adı:** PatiDost
-- **Paket Adı:** com.patidost.app
-- **Hedef SDK:** 34
-- **Minimum SDK:** 24
+## Hedef Kullanıcı
+- Evcil hayvan sahiplenmek isteyenler
+- Hayvanlarına yuva arayanlar
+- Geçici yuva (foster) olmak isteyenler
+- Gönüllüler ve hayvanseverler
 
-## İŞ MODELİ
-- **Monetizasyon:** Freemium (Temel özellikler ücretsiz, "Pati Puanı" ile ek özellikler)
-- **Hedef Gelir (12 ay):** N/A (İlk hedef kullanıcı tabanı oluşturma)
-- **Rekabet Analizi:** Genel ilan siteleri, basit eşleştirme uygulamaları. Farklılaşma: Güvenilirlik, topluluk ve oyunlaştırma.
+## Ürün Problemi
+Sokak hayvanları veya yuva arayan evcil hayvanlar ile potansiyel sahipleri arasında güvenilir, kolay ve etkili bir köprü bulunmuyor. Süreçler genellikle dağınık ve takibi zor.
 
-## TEKNİK VİZYON
-- **Mimari Pattern:** MVVM (Clean Architecture katmanları ile)
-- **UI Framework:** Jetpack Compose
-- **Veri Katmanı:** Room ve DataStore
-- **Network:** Retrofit
-- **Bağımlılık Yönetimi:** Gradle Version Catalogs & `buildSrc` Convention Plugins
+## Değer Önerisi
+"PatiDost, yuva arayan her can için güvenli ve şeffaf bir dijital köprü kurar."
 
-## GÜVENLİK POLİTİKALARI
-- **Veri Şifreleme:** TBD (Hassas veri için Jetpack Security kullanılacak)
-- **API Güvenliği:** SSL Pinning (ileriki fazlarda)
-- **Kod Obfuscation:** ProGuard/R8 (Release build'larda aktif)
+## Para Kazanma Modeli
+- **FAZ 1:** Tamamen Ücretsiz (Topluluk oluşturma)
+- **FAZ 2:** Gönüllü Bağışlar
+- **FAZ 3:** Premium İlanlar (Öne Çıkarma), Sponsorlu İçerikler (Mama firmaları vb.)
+
+## Regülasyon Riskleri
+- **KVKK/GDPR:** Kullanıcı verilerinin (İsim, konum, iletişim) güvenli saklanması ve işlenmesi.
+- **Hayvan Hakları Yasası:** Sahiplendirme ve sahiplenme koşullarının yasalara uygunluğunun sağlanması.
+
+## Platform Stratejisi
+- **Birincil:** Android (Mobil odaklı)
+- **İkincil:** Web (Destekleyici, yönetici paneli)

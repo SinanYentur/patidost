@@ -1,7 +1,7 @@
-# GÖREV HAVUZU (BACKLOG) - FAZ 1 (MVP)
+# GÖREV HAVUZU (BACKLOG) - FAZ 1 (SIFIR MALİYET EDİSYONU)
 
 ## EPIC-1: ALTYAPI VE TEMEL KURULUM (ÖNCELİK: YÜKSEK)
-Projenin teknik iskeletinin kurulması.
+Projenin teknik iskeletinin kurulması. Tamamen yerel geliştirme.
 
 - [ ] **TASK-1.1:** `buildSrc` ve Convention Plugin yapılandırması. (Gradle setup)
 - [ ] **TASK-1.2:** Temel Modül Yapısının Oluşturulması (`:core:ui`, `:core:data`, `:core:network`).
@@ -9,45 +9,36 @@ Projenin teknik iskeletinin kurulması.
 - [ ] **TASK-1.4:** Temel UI Teması (Material 3, Typography, Colors, Dark Mode).
 - [ ] **TASK-1.5:** Dependency Injection (Hilt) Kurulumu.
 
-## EPIC-2: KİMLİK DOĞRULAMA (AUTH) (ÖNCELİK: YÜKSEK)
-Kullanıcıların sisteme güvenli giriş yapması.
+## EPIC-2: KİMLİK DOĞRULAMA (SIMULATED AUTH) (ÖNCELİK: YÜKSEK)
+Bulut masrafı çıkarmamak için yerel simülasyon veya Ücretsiz Firebase Sınırı.
 
-- [ ] **TASK-2.1:** Firebase Console kurulumu ve `google-services.json` entegrasyonu.
-- [ ] **TASK-2.2:** `AuthRepository` ve UseCase'lerin yazılması (Login, Register, Logout).
-- [ ] **TASK-2.3:** Login Ekranı UI (Email/Password + Google Sign In butonu).
-- [ ] **TASK-2.4:** Register Ekranı UI (Validasyon kuralları ile).
-- [ ] **TASK-2.5:** AuthViewModel ve Unit Testleri.
+- [ ] **TASK-2.1:** `AuthRepository` arayüzünün oluşturulması.
+- [ ] **TASK-2.2:** **MockAuthRepository** (Sahte Giriş) implementasyonu. (İnternet gerektirmez, %0 maliyet).
+- [ ] **TASK-2.3:** Login Ekranı UI.
+- [ ] **TASK-2.4:** Register Ekranı UI.
+- [ ] **TASK-2.5:** Kullanıcı oturumunu yerel olarak (DataStore) saklama.
 
-## EPIC-3: KEŞİF VE İLANLAR (DISCOVERY) (ÖNCELİK: YÜKSEK)
-Hayvan ilanlarının listelenmesi.
+## EPIC-3: KEŞİF VE İLANLAR (MOCK DATA) (ÖNCELİK: YÜKSEK)
+Sunucu bağlantısı yerine yerel sahte verilerle (JSON) çalışma.
 
-- [ ] **TASK-3.1:** Room Database kurulumu (Local Cache için).
-- [ ] **TASK-3.2:** İlan Veri Modelleri (Pet, Breed, Location) ve API arayüzü (Mocky/Firebase).
-- [ ] **TASK-3.3:** `DiscoveryRepository` ve Offline-First mantığı.
-- [ ] **TASK-3.4:** Ana Sayfa (Feed) UI - LazyColumn ile liste yapısı.
-- [ ] **TASK-3.5:** Filtreleme BottomSheet UI (Tür, Yaş, Şehir).
+- [ ] **TASK-3.1:** Room Database kurulumu (Tamamen cihazda çalışır).
+- [ ] **TASK-3.2:** İlan Veri Modelleri (Pet, Breed, Location).
+- [ ] **TASK-3.3:** **FakeDiscoveryDataSource**: Uygulama içine gömülü 10-15 örnek ilan verisi oluşturma.
+- [ ] **TASK-3.4:** Ana Sayfa (Feed) UI - Gömülü verileri listeleme.
+- [ ] **TASK-3.5:** Filtreleme UI (Yerel veriyi filtreler).
 
-## EPIC-4: İLAN DETAY VE ETKİLEŞİM (ÖNCELİK: ORTA)
-İlanın detaylarının görüntülenmesi.
+## EPIC-4: İLAN DETAY (ÖNCELİK: ORTA)
+- [ ] **TASK-4.1:** İlan Detay Ekranı UI.
+- [ ] **TASK-4.2:** Favorilere Ekleme (Room DB - Yerel Kayıt).
+- [ ] **TASK-4.3:** "Sahiplen" butonu (Sadece Toast mesajı gösterir, SMS/Arama intent'i açar).
 
-- [ ] **TASK-4.1:** İlan Detay Ekranı UI (Fotoğraf Slider, Açıklama, Harita).
-- [ ] **TASK-4.2:** "Sahiplen" butonu aksiyonu ve iletişim dialog'u.
-- [ ] **TASK-4.3:** Favorilere Ekleme (Room DB local storage).
-
-## EPIC-5: İLAN OLUŞTURMA (ÖNCELİK: ORTA)
-Kullanıcının yeni ilan girmesi.
+## EPIC-5: İLAN OLUŞTURMA (LOCAL STORAGE) (ÖNCELİK: ORTA)
+Resimler buluta yüklenmez, sadece cihaz hafızasında tutulur.
 
 - [ ] **TASK-5.1:** Fotoğraf Seçici (Photo Picker) entegrasyonu.
-- [ ] **TASK-5.2:** İlan Formu UI (Stepper yapısı).
-- [ ] **TASK-5.3:** Firebase Storage'a fotoğraf yükleme mantığı.
-- [ ] **TASK-5.4:** İlanı backend'e (Firestore) kaydetme.
-
-## EPIC-6: PROFİL (ÖNCELİK: DÜŞÜK)
-Kullanıcı ayarları.
-
-- [ ] **TASK-6.1:** Profil Ekranı UI.
-- [ ] **TASK-6.2:** Kullanıcının İlanlarım Listesi.
-- [ ] **TASK-6.3:** Çıkış Yap (Logout) fonksiyonu.
+- [ ] **TASK-5.2:** İlan Formu UI.
+- [ ] **TASK-5.3:** İlanı yerel veritabanına (Room) kaydetme.
+- [ ] **TASK-5.4:** Listeye yeni eklenen ilanı anında gösterme (Local State Update).
 
 ---
-**NOT:** Her task için Anayasa Madde 4.2 uyarınca ayrı bir "Görev Emri" oluşturulacaktır.
+**MALİYET NOTU:** Bu plandaki hiçbir madde dış sunucuya bağlanmaz, API key gerektirmez ve kredi kartı bilgisi istemez. Tamamen güvenlidir.

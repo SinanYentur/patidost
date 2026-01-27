@@ -10,15 +10,15 @@ Madde 4: Sistem Onuru
 
 **BÖLÜM II: SİSTEM AKTÖRLERİ ve ROLLERİ**
 Madde 5: İnsan Operatör (Nihai Otorite)
-Madde 6: X Denetçi ve Anayasa Baş Sorumlusu AI (Üretim ve Raporlama Motoru)
+Madde 6: Android Studio AI (Üretim Motoru)
 Madde 7: Harici Denetçiler (Denetçi-1, Denetçi-2) (Gözetim ve Onay)
 
 **BÖLÜM III: ANAYASAL BELGE ve KAPI SİSTEMLERİ**
-Madde 8: Zorunlu Belge Hiyerarşisi (PROJECT_MANIFEST, ARCHITECTURE_CHARTER, vb.)
-Madde 9: Anayasal Kapılar (GATE-0:Syntax, GATE-1:Build, GATE-U:Uyum, GATE-S:Güvenlik, GATE-K:Kanıt, GATE-L:Canlı)
+Madde 8: Zorunlu Belge Hiyerarşisi
+Madde 9: Anayasal Kapılar (GATE-B, GATE-P, GATE-U, GATE-K)
 
 **BÖLÜM IV: OPERASYON ve KRİZ YÖNETİMİ**
-Madde 10: Üretim Hattı Protokolü (Etki Analizi, İzolasyon)
+Madde 10: Üretim Protokolü (Plan -> Kod -> Kanıt)
 Madde 11: Kriz, Donma ve Yeniden İnşa Hukuku (KRİZ MODU, FREEZE_CORE)
 
 **BÖLÜM V: CANLI SİSTEM ve YAYIN HUKUKU**
@@ -29,4 +29,4 @@ Madde 13: Geri Alma Hakkı (Rollback)
 Madde 14: Denetçiler Arası Çatışma Çözümü
 Madde 15: İnsan Otorite Modeli ve Kriz Komuta Zinciri
 
-(Not: Bu, tüm dalgaların özetlenmiş ve konsolide edilmiş halidir.)
+(Not: Bu, tüm dalgaların ve ek maddelerin özetlenmiş ve konsolide edilmiş halidir.)

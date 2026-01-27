@@ -1,10 +1,2 @@
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.jetbrains.kotlin.android) apply false
-    alias(libs.plugins.hilt) apply false
-    alias(libs.plugins.detekt) apply false
-    alias(libs.plugins.google.services) apply false
-    alias(libs.plugins.firebase.crashlytics) apply false
-    alias(libs.plugins.ksp) apply false
-}
+// This file is intentionally left blank. 
+// All plugin management is now handled by the central Build Anayasa (`buildSrc`).

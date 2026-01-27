@@ -1,19 +1,13 @@
 package com.patidost.app
 
 import android.app.Application
-import androidx.hilt.work.HiltWorkerFactory
-import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
 
+// Hilt'in doğru çalışması için bu sınıfın Application'dan miras alması ZORUNLUDUR.
 @HiltAndroidApp
-class PatiDostApp : Application(), Configuration.Provider {
-
-    @Inject
-    lateinit var workerFactory: HiltWorkerFactory
-
-    override val workManagerConfiguration: Configuration
-        get() = Configuration.Builder()
-            .setWorkerFactory(workerFactory)
-            .build()
+class PatiDostApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        // Başlangıç kodları buraya eklenebilir.
+    }
 }

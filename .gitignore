@@ -13,5 +13,7 @@ local.properties
 app/src/main/assets/
 app/src/androidTest/
 app/src/test/
-*.log
 
+# ANAYASAL İSTİSNA: OP_CHAIN.log, projenin değiştirilemez kaydıdır ve anayasanın bir parçasıdır.
+*.log
+!OP_CHAIN.log
