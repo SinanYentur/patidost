@@ -137,33 +137,56 @@ dependencies {
 }
 
 // === 🔐 CONSTITUTIONAL PIN TABLE LOCK ===
-tasks.register("verifyPinTable") {
-    doLast {
-        val pin = file(".constitution/PIN_TABLE.md")
-        if (!pin.exists()) {
-            throw GradleException("ANAYASAL İHLAL: .constitution/PIN_TABLE.md bulunamadı. Build durduruldu.")
-        }
         println("🟢 PIN_TABLE doğrulandı.")
     }
 }
 
 tasks.named("preBuild") {
-    dependsOn("verifyPinTable")
-}
 // === END CONSTITUTIONAL LOCK ===
 
 // === 🧭 ANDROID STUDIO AI ENTRY LOCK ===
-tasks.register("verifyAiEntryPoint") {
-    doLast {
-        val entry = file(".constitution/ANDROID_STUDIO_AI_ENTRY.md")
-        if (!entry.exists()) {
-            throw GradleException("ANAYASAL İHLAL: ANDROID_STUDIO_AI_ENTRY.md yok. Yanlış anayasa.")
-        }
         println("🟢 AI ENTRY doğrulandı.")
     }
 }
 
 tasks.named("preBuild") {
-    dependsOn("verifyAiEntryPoint")
-}
 // === END ENTRY LOCK ===
+
+// ================================
+// 🏛️ CONSTITUTIONAL BUILD LOCKS
+// ================================
+
+tasks.register("verifyPinTable") {
+    doLast {
+        val pin = file(".constitution/PIN_TABLE.md")
+        if (!pin.exists()) {
+            throw GradleException("ANAYASAL İHLAL: PIN_TABLE yok. Build durduruldu.")
+        }
+        println("🟢 PIN_TABLE doğrulandı.")
+    }
+}
+
+tasks.register("verifyAiEntryPoint") {
+    doLast {
+        val entry = file(".constitution/ANDROID_STUDIO_AI_ENTRY.md")
+        if (!entry.exists()) {
+            throw GradleException("ANAYASAL İHLAL: AI ENTRY yok. Build durduruldu.")
+        }
+        println("🟢 AI ENTRY doğrulandı.")
+    }
+}
+
+tasks.register<Exec>("verifyConstitutionIntegrity") {
+    commandLine("bash", "scripts/verify_constitution_integrity.sh")
+}
+
+tasks.named("preBuild") {
+    dependsOn("verifyPinTable")
+    dependsOn("verifyAiEntryPoint")
+    dependsOn("verifyConstitutionIntegrity")
+}
+
+// ================================
+// END CONSTITUTIONAL LOCKS
+// ================================
+
