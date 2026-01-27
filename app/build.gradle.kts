@@ -151,3 +151,19 @@ tasks.named("preBuild") {
     dependsOn("verifyPinTable")
 }
 // === END CONSTITUTIONAL LOCK ===
+
+// === 🧭 ANDROID STUDIO AI ENTRY LOCK ===
+tasks.register("verifyAiEntryPoint") {
+    doLast {
+        val entry = file(".constitution/ANDROID_STUDIO_AI_ENTRY.md")
+        if (!entry.exists()) {
+            throw GradleException("ANAYASAL İHLAL: ANDROID_STUDIO_AI_ENTRY.md yok. Yanlış anayasa.")
+        }
+        println("🟢 AI ENTRY doğrulandı.")
+    }
+}
+
+tasks.named("preBuild") {
+    dependsOn("verifyAiEntryPoint")
+}
+// === END ENTRY LOCK ===
