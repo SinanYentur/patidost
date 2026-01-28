@@ -1,3 +1,5 @@
+// @pin: [FAZ4-001] Sahte keşif verileri, sistemin dayanıklılık testlerinin parçasıdır.
+
 package com.patidost.core.data.repository
 
 import com.patidost.core.domain.model.Pet

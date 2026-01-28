@@ -1,3 +1,5 @@
+// @pin: [FAZ1-001] Keşif arayüzü, sistemin genişleme ve dış dünya sözleşmesidir.
+
 package com.patidost.core.domain.repository
 
 import com.patidost.core.domain.model.Pet

@@ -1,3 +1,5 @@
+// @pin: [FAZ5-001] Hata ve sonuç modelleri, anayasal raporlama hukukuna tabidir.
+
 package com.patidost.core.domain.auth
 
 /**
