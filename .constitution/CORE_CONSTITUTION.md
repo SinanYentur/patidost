@@ -1,3 +1,5 @@
+<!-- @pin: [CORE-001] Bu belge, kendisinin sistemin mutlak üst normu olduğunu beyan eder. -->
+
 # CORE_CONSTITUTION (v2.0)
 KATMAN: GLOBAL / ŞİRKET ANAYASASI
 STATÜ: MUTLAK ÜST NORM

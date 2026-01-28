@@ -1,3 +1,6 @@
+<!-- @pin: [FAZ0-001] Bu manifest, projenin temel amacını ve kimliğini yansıtır. -->
+<!-- @pin: [FAZ4-001] Uygulamanın çökme ve dayanıklılıkla ilgili temel beyanlarını içerir. -->
+
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">

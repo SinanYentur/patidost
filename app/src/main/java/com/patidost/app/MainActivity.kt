@@ -1,3 +1,6 @@
+// @pin: [CORE-001] Bu aktivite, sistemin tüm operasyonel ilkelerine tabidir.
+// @pin: [PROJ-001] Bu aktivite, Patidost projesinin tanımlanmış prensiplerini hayata geçirir.
+
 package com.patidost.app
 
 import android.os.Bundle
