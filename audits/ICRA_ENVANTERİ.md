@@ -1,65 +1,34 @@
-# İCRA ENVANTERİ (EXECUTION INVENTORY) v1.0
+# İCRA ENVANTERİ (EXECUTION INVENTORY) v5.0 - PHOENIX
 
 **ANAYASAL KİMLİK BLOĞU**
-*Bu belge, PATIDOST Anayasası uyarınca bağlayıcıdır. İçeriğindeki boşluklar doldurulmadan ilgili kod parçası Commit edilemez.*
+*Bu belge, PATIDOST Anayasası uyarınca bağlayıcıdır.*
 
 ---
 
-- **MERKEZ ANAYASA:** OMEGA_CODEX_V1.md
-- **ÜST DAYANAK:** ANAYASAL_EK_PROTOKOL.md
+- **MERKEZ ANAYASA:** GLOBAL_PRE_EMPTIVE_CONSTITUTION.md
 - **NORM TÜRÜ:** Anayasal Kayıt
-- **BAĞLI OLDUĞU MADDELER:** ANAYASAL_EK_PROTOKOL §III
-- **GEÇERLİ FAZLAR:** Tüm Fazlar
-- **BAĞLADIĞI ROLLER:** Android Studio AI, Denetçiler, CI/CD
-- **DEĞİŞTİRİLEBİLİRLİK STATÜSÜ:** Otomatik Güncellenir (İnsan müdahalesi yasaktır)
+- **DEĞİŞTİRİLEBİLİRLİK STATÜSÜ:** Otomatik Güncellenir
 
 ---
-
-*Bu belge, projenin derleme anındaki fiziksel gerçekliğinin tekil kaydıdır. Dokümanlardaki beyanlar değil, bu envanterdeki durum esastır.*
 
 ## 0. ANAYASAL VARLIK ENVANTERİ (Hukuki Statü)
 
 | Varlık ID | Anayasal Tür | Fiziksel Yol | Durum |
 | :--- | :--- | :--- | :--- |
-| `SC-01` | Sözleşme | `/ui_constitution/01_LOGIN_SCREEN_CHARTER.md` | Tanımlandı |
-| `SC-02` | Sözleşme | `/ui_constitution/02_ONBOARDING_SCREEN_CHARTER.md` | Tanımlandı |
-| `SC-03` | Sözleşme | `/ui_constitution/03_DISCOVERY_SCREEN_CHARTER.md` | Tanımlandı |
-| `SC-04` | Sözleşme | `/ui_constitution/04_PROFILE_SCREENS_CHARTER.md` | Tanımlandı |
-| `SC-05` | Sözleşme | `/ui_constitution/05_ALARMS_SCREEN_CHARTER.md` | Tanımlandı |
+| `PGC-001` | **MUTLAK ÜST NORM** | `/.constitution/GLOBAL_PRE_EMPTIVE_CONSTITUTION.md` | **KİLİTLİ** |
+| `PIN-000` | Anayasal Envanter | `/.constitution/ANAYASAL_PIN_TABLE.md` | **AKTİF** |
+| `FAZ0-001`| Kurucu Prensipler | `/.constitution/FAZ_0_CORE_PRINCIPLES.md` | **AKTİF** |
+| `FAZ1-001`| Build & Toolchain | `/.constitution/BUILD_AND_TOOLCHAIN_CONSTITUTION.md` | **AKTİF** |
+| `FAZ4-001`| Dayanıklılık & Çöküş | `/.constitution/SYSTEM_RESILIENCE_AND_COLLAPSE_CONSTITUTION.md` | **AKTİF** |
+| `FAZ5-001`| Evrim & Değişim | `/.constitution/SYSTEM_EVOLUTION_AND_CHANGE_CONSTITUTION.md` | **AKTİF** |
+| `FAZ6-001`| Meta-Yönetişim | `/.constitution/META_GOVERNANCE_AND_CONTROL_CONSTITUTION.md` | **AKTİF** |
 
 ## 1. MODÜL BAĞLANIRLIK HARİTASI
 
-*Bu bölüm, `gradle :app:dependencies` komutunun çıktısını yansıtır.*
+| Durum |
+| :--- |
+| **HENÜZ DOĞRULANMADI** |
 
-| Kaynak Modül | Hedef Modül | Konfigürasyon (api/impl) | Durum (Görünüyor/Görünmüyor) |
-| :--- | :--- | :--- | :--- |
-| `:app` | `:feature:auth` | `implementation` | **Bilinmiyor** |
-| `:app` | `:feature:discovery` | `implementation` | **Bilinmiyor** |
-| `:app` | `:feature:pet_detail`| `implementation` | **Bilinmiyor** |
-| `:app` | `:feature:profile` | `implementation` | **Bilinmiyor** |
+## 2. DERLEME BÜTÜNLÜĞÜ (GATE-M)
 
-## 2. FEATURE API YÜZEYİ
-
-*Bu bölüm, her feature modülünün dışarıya açtığı `public` arayüzleri listeler.*
-
-| Feature Modülü | Public API (Composable Fonksiyon) | Durum |
-| :--- | :--- | :--- |
-| `:feature:auth` | `AuthScreen` | **Doğrulanmadı** |
-| `:feature:discovery` | `DiscoveryScreen` | **Doğrulanmadı** |
-| `:feature:profile` | `ProfileScreen` | **Doğrulanmadı** |
-| `:feature:pet_detail` | `PetDetailScreen` | **Doğrulanmadı** |
-
-## 3. CONVENTION PLUGIN ETKİ MATRİSİ
-
-*Bu bölüm, `buildSrc` içindeki her plugin'in hangi modüllere hangi yetenekleri kazandırdığını gösterir.*
-
-| Convention Plugin | Uygulandığı Modül | Kazandırdığı Kimlik |
-| :--- | :--- | :--- |
-| `patidost.android.application` | `:app` | Kotlin, Compose, Hilt |
-| `patidost.android.library` | `:core:*`, `:feature:*` | Kotlin, Compose, Hilt |
-
-## 4. GATE-M DURUMU
-
-*   **Son Denetim ID:** Yok
 *   **Durum:** **KAPALI**
-*   **Kanıt Dosyaları:** Henüz Üretilmedi
