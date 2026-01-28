@@ -1,3 +1,5 @@
+// @pin: [FAZ1-001] Bağımlılıkların sağlanması, sistemin inşa ve toolchain bütünlüğünün bir parçasıdır.
+
 package com.patidost.core.data.di
 
 import com.patidost.core.data.repository.MockAuthRepository

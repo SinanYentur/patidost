@@ -1,3 +1,5 @@
+// @pin: [FAZ4-001] Bu mock repository, sistemin dayanıklılık ve çöküş testlerinde kritik bir rol oynar.
+
 package com.patidost.core.data.repository
 
 import com.patidost.core.domain.repository.AuthRepository

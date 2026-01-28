@@ -1,3 +1,5 @@
+// @pin: [FAZ1-001] Bu arayüz, modüller arası bir sözleşmedir ve toolchain bütünlüğünün parçasıdır.
+
 package com.patidost.core.domain.repository
 
 interface AuthRepository {

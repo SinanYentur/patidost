@@ -1,3 +1,6 @@
+// @pin: [FAZ5-001] Bu use case, sistemin değişim ve evrim hukukuna tabidir.
+// @pin: [CORE-001] İş mantığı, Mutlak Şüphe ilkesiyle denetlenmelidir.
+
 package com.patidost.core.domain.auth
 
 /**
