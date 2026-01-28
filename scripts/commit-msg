@@ -1,18 +1,39 @@
 #!/usr/bin/env bash
+# Patidost Anayasal Kapı Sistemi v5.1 (CERBERUS - ÜÇ BAŞLI)
+
 REPO_ROOT=$(git rev-parse --show-toplevel)
 COMMIT_MSG=$(cat "$1")
-PIN_PATTERN="\[([A-Z0-9]+-[0-9]+)\]"
 
-if [[ $COMMIT_MSG =~ $PIN_PATTERN ]]; then
-    REF_ID="${BASH_REMATCH[1]}"
-    if bash "$REPO_ROOT/scripts/constitutional_ref_scanner.sh" "$REF_ID"; then
-        echo "✅ Anayasal referans doğrulandı: $REF_ID"
-        exit 0
-    else
-        echo "🔴 ANAYASAL İHLAL (ML-002): '$REF_ID' bulunamadı!"
-        exit 1
-    fi
-else
-    echo "🔴 ANAYASAL İHLAL (ML-001): Format hatası! [ID-NO] gerekli."
-    exit 1
+# --- ML-001: FORMAT KİLİDİ ---
+ANAYASAL_REF_PATTERN="\[([A-Z0-9]+-[0-9]+)\]"
+TICKET_REF_PATTERN="\[(PATI-[0-9]+)\]"
+
+if ! [[ $COMMIT_MSG =~ $ANAYASAL_REF_PATTERN ]]; then
+    echo "🔴 ANAYASAL İHLAL (ML-001): Anayasal referans [ID-NO] formatında değil."; exit 1;
 fi
+ANAYASAL_REF_ID=${BASH_REMATCH[1]}
+
+if ! [[ $COMMIT_MSG =~ $TICKET_REF_PATTERN ]]; then
+    echo "🔴 ANAYASAL İHLAL (ML-003a): Bilet referansı [PATI-XXX] formatında değil."; exit 1;
+fi
+TICKET_REF_ID=${BASH_REMATCH[1]}
+
+echo "✅ Formatlar doğrulandı (Anayasal: $ANAYASAL_REF_ID, Bilet: $TICKET_REF_ID)."
+
+# --- ML-002: ANAYASAL DOĞRULAMA MOTORU ---
+SCANNER_SCRIPT="$REPO_ROOT/scripts/constitutional_ref_scanner.sh"
+if ! bash "$SCANNER_SCRIPT" "$ANAYASAL_REF_ID"; then
+    echo "🔴 ANAYASAL İHLAL (ML-002): Anayasal referans '$ANAYASAL_REF_ID' geçersiz!" ; exit 1;
+fi
+echo "✅ Anayasal referans, indekste doğrulandı."
+
+# --- ML-003: BİLET DOĞRULAMA MOTORU ---
+TICKET_CHECKER_SCRIPT="$REPO_ROOT/scripts/ticket_status_checker.sh"
+if ! bash "$TICKET_CHECKER_SCRIPT" "$TICKET_REF_ID"; then
+    echo "🔴 ANAYASAL İHLAL (ML-003b): Bilet '$TICKET_REF_ID' bulunamadı veya statüsü [OPEN]/[IN-PROGRESS] değil!"; exit 1;
+fi
+echo "✅ Bilet referansı, aktif görev listesinde doğrulandı."
+
+echo "
+🏁 Tüm anayasal kapılar geçildi. Commit onaylandı."
+exit 0
