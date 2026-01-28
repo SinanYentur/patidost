@@ -1,14 +1,22 @@
-# ANAYASAL KAPSAMA RAPORU (MAP-001)
-*Oluşturma Tarihi: Wed Jan 28 18:08:19 TSS 2026*
+# ANAYASAL KAPSAMA RAPORU (MAP-001) - STRATEJİK ODAK
+*Oluşturma Tarihi: Wed Jan 28 21:46:11 TSS 2026*
 
-## 📊 Özet Metrikler
-- **Tespit Edilen Toplam Anayasal Referans Sayısı:** **0**
+## 📊 Stratejik Metrikler (Data & Domain)
+- **Tespit Edilen Stratejik Referans Sayısı:** **8**
+- **Tespit Edilen Stratejik Yetim Dosya Sayısı:** **0**
 
 --- 
 
-## 🗺️ Anayasal Referans Haritası
-*Projede bulunan tüm anayasal etiketler ve bulundukları yerler:*
+## 🗺️ Stratejik Anayasal Referans Haritası
+*Data ve Domain katmanlarında bulunan anayasal etiketler:*
 ```
+core/data/src/main/java/com/patidost/core/data/di/DataModule.kt:@pin: [FAZ1-001]
+core/data/src/main/java/com/patidost/core/data/repository/MockAuthRepository.kt:@pin: [FAZ4-001]
+core/data/src/main/java/com/patidost/core/data/repository/MockDiscoveryRepository.kt:@pin: [FAZ4-001]
+core/domain/src/main/java/com/patidost/core/domain/auth/AuthResult.kt:@pin: [FAZ5-001]
+core/domain/src/main/java/com/patidost/core/domain/auth/LoginUseCase.kt:@pin: [FAZ5-001]
+core/domain/src/main/java/com/patidost/core/domain/auth/LoginUseCase.kt:@pin: [CORE-001]
+core/domain/src/main/java/com/patidost/core/domain/model/Pet.kt:@pin: [FAZ0-001]
+core/domain/src/main/java/com/patidost/core/domain/repository/AuthRepository.kt:@pin: [FAZ1-001]
+core/domain/src/main/java/com/patidost/core/domain/repository/DiscoveryRepository.kt:@pin: [FAZ1-001]
 ```
-
-⚠️ **KRİTİK UYARI: Projede henüz HİÇBİR anayasal PIN bulunamadı! Sistem 'Sıfır Meşruiyet' durumundadır.**

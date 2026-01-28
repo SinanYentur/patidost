@@ -1,0 +1,5 @@
+C:/Users/Kratos35/AndroidStudioProjects/patidostapp/app/src/main/AndroidManifest.xml:@pin: [FAZ0-001]
+C:/Users/Kratos35/AndroidStudioProjects/patidostapp/app/src/main/AndroidManifest.xml:@pin: [FAZ4-001]
+C:/Users/Kratos35/AndroidStudioProjects/patidostapp/app/src/main/java/com/patidost/app/MainActivity.kt:@pin: [CORE-001]
+C:/Users/Kratos35/AndroidStudioProjects/patidostapp/app/src/main/java/com/patidost/app/MainActivity.kt:@pin: [PROJ-001]
+C:/Users/Kratos35/AndroidStudioProjects/patidostapp/build.gradle.kts:@pin: [FAZ1-001]

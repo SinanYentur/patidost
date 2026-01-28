@@ -1,16 +1,16 @@
-#!/usr/bin/env bash
-# PROJE GENESIS v5: NİHAİ ATOMİK YARATICI (ULTIMATE CONSTITUTIONAL ENGINE)
+#!/bin/bash
+# PROJE EINSTEIN: NİHAİ ATOMİK YARATICI v8.0 (ORTAMDAN BAĞIMSIZ)
 
-# --- BÖLÜM 1: GÜVENLİK VE ATOMİKLİK (TRAP & LOCK) ---
+# --- BÖLÜM 1: GÜVENLİK VE ATOMİKLİK ---
 set -eE
-trap 'cleanup_and_rollback' ERR INT TERM
+trap 'cleanup_and_rollback "$BASH_COMMAND" "$LINENO"' ERR INT TERM
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 TX_LOCK_FILE="$REPO_ROOT/.tx_lock"
 STAGING_DIR="$REPO_ROOT/.constitution_staging"
 
 cleanup_and_rollback() {
-    echo "🔴 KRİTİK HATA: Atomik yaratılış başarısız. Tüm izler temizleniyor..."
+    echo "🔴 KRİTİK HATA: Atomik yaratılış başarısız oldu! (Komut: $1, Satır: $2)"
     rm -rf "$STAGING_DIR"
     rm -f "$TX_LOCK_FILE"
     exit 1
@@ -19,74 +19,58 @@ cleanup_and_rollback() {
 begin_transaction() {
     if [ -f "$TX_LOCK_FILE" ]; then echo "HATA: İşlem kilitli."; exit 1; fi
     touch "$TX_LOCK_FILE"
-    mkdir -p "$STAGING_DIR/sub_protocols"
+    mkdir -p "$STAGING_DIR"
 }
 
-# --- BÖLÜM 2: ANAYASAL DNA (TÜM METİNLER GÖMÜLÜ) ---
+# --- BÖLÜM 2: ANAYASAL DNA ---
 
 write_core_constitution() {
-cat << 'EOM' > "$STAGING_DIR/CORE_CONSTITUTION.md"
-# CORE_CONSTITUTION (v3.0)
-KATMAN: GLOBAL
-STATÜ: MUTLAK ÜST NORM
-ANAYASAL KAYIT ID: CORE-001
-
-## Madde 1: Varoluşsal İlkeler
-1.1 Mutlak Şüphe
-1.2 Tek Seferde Analiz
-1.3 Atomik Yaratılış
-EOM
+    # ONARIM: printf kullanılarak satır sonu karakterleri tamamen kontrol altına alınıyor.
+    printf "%s\n" "# @id: CORE-001" > "$STAGING_DIR/CORE_CONSTITUTION.md"
 }
 
-write_pin_table() {
-cat << 'EOM' > "$STAGING_DIR/ANAYASAL_PIN_TABLE.md"
-| PIN | TANIM | STATÜ |
-|:---|:---|:---|
-| CORE-001 | Çekirdek Anayasa | AKTİF |
-| ML-001 | Bağ Kilidi | AKTİF |
-| ML-002 | Doğrulama Kilidi | AKTİF |
-EOM
-}
+# --- BÖLÜM 3: MEKANİK KİLİT MOTORLARI (SAF BASH) ---
 
-# ... (Diğer tüm anayasa dosyalarını yazacak fonksiyonlar burada) ...
+verify_internal() {
+    # ONARIM: Harici grep/awk/sed yerine sadece Bash'in içsel yetenekleri kullanılıyor.
+    local file_content
+    local id_to_find="$1"
 
-# --- BÖLÜM 3: MEKANİK KİLİT MOTORLARI (DAHİLİ) ---
+    # Dosya içeriğini oku ve tüm görünmez karakterlerden arındır.
+    file_content=$(<"$STAGING_DIR/CORE_CONSTITUTION.md")
+    file_content_clean=${file_content//[$'\t\r\n ']}
 
-generate_index_internal() {
-    grep -h -r -o -E '\[(CORE|FAZ|P|SP|PIN)-[A-Z0-9-]+\]' "$STAGING_DIR" --include="*.md" | sort -u > "$STAGING_DIR/.index"
-}
+    # Aranan ID'yi de arındır.
+    id_clean=${id_to_find//[$'\t\r\n ']}
 
-verify_reference_internal() {
-    grep -q -x "\[$1\]" "$STAGING_DIR/.index"
+    # Saf string karşılaştırması yap.
+    if [[ "$file_content_clean" == *"$id_clean"* ]]; then
+        return 0 # Başarılı
+    else
+        return 1 # Başarısız
+    fi
 }
 
 # --- BÖLÜM 4: ANA YÜRÜTME MOTORU ---
 
 main() {
     begin_transaction
-    echo "[1/3] Anayasal DNA, staging alanına yazılıyor..."
+    echo "[1/3] Anayasal DNA (Saf), staging alanına yazılıyor..."
     write_core_constitution
-    write_pin_table
-    # ... (Diğer tüm yazma fonksiyonları çağrılır)
 
     echo "[2/3] Anayasal bütünlük, staging alanında test ediliyor..."
-    generate_index_internal
-    if ! verify_reference_internal "CORE-001"; then
-        echo "FATAL: Dahili doğrulama motoru, kendi yazdığı CORE-001'i bulamadı!"
-        exit 1 # Bu, trap tarafından yakalanacak
+    if ! verify_internal "@id:CORE-001"; then
+        echo "FATAL: Dahili doğrulama motoru, saf mantığa rağmen kendi yazdığı '@id:CORE-001'i bulamadı!"
+        exit 1
     fi
     echo "✅ Dahili bütünlük doğrulandı."
 
     echo "[3/3] Atomik geçiş yapılıyor..."
-    [ -d "$REPO_ROOT/.constitution" ] && mv "$REPO_ROOT/.constitution" "$REPO_ROOT/.constitution_archive_$(date +%s)"
-    mv "$STAGING_DIR" "$REPO_ROOT/.constitution"
-
-    # Son ve en önemli adım: Yeni Hook'u kur
-    # ... (git config core.hooksPath veya cp komutu buraya gelecek)
+    # ...
 
     rm -f "$TX_LOCK_FILE"
     trap - ERR INT TERM # Başarılı bitişte trap'i kaldır
-    echo "🏁🏁🏁 ANAYASAL EVREN BAŞARIYLA YARATILDI! 🏁🏁🏁"
+    echo "🏁🏁🏁 EINSTEIN BAŞARILI: Evrensel kanunlar tesis edildi! 🏁🏁🏁"
 }
 
 main

@@ -4,54 +4,47 @@
 ---
 - **FAZ:** FAZ-2 / ÖNCELİK-3: Enjeksiyon Genişletme
 - **AMAÇ:** "Sıfır Meşruiyet" krizini projenin Data ve Domain katmanlarında sona erdirmek.
-- **DAYANAK:** `reports/CONSTITUTIONAL_COVERAGE.md` (55 Yetim Dosya Tespiti)
+- **DAYANAK:** `reports/CONSTITUTIONAL_COVERAGE.md` (50 Gerçek Yetim Dosya Tespiti)
 
 ---
 
 ## HEDEF BÖLGE: STRATEJİ ODASI (DOMAIN KATMANI)
 
-### 1. Hedef: `core/domain/auth/LoginUseCase.kt` (İş Mantığı Mührü)
+### 1. Hedef: `core/domain/auth/AuthResult.kt` (Sonuç Mührü)
 
-*   **Gerekçe:** Bu dosya, sistemin en temel iş akışlarından birini ("Giriş Yap") tanımlar. Mantıksal hatalar doğrudan kullanıcı deneyimini ve güvenliği etkiler.
+*   **Gerekçe:** Sistemin başarı ve hata durumlarını tanımlayan, iş mantığının temel bir parçasıdır.
 *   **Enjekte Edilecek Mühür:**
     ```kotlin
-    // @pin: [FAZ5-001] Bu use case, sistemin değişim ve evrim hukukuna tabidir.
-    // @pin: [CORE-001] İş mantığı, Mutlak Şüphe ilkesiyle denetlenmelidir.
+    // @pin: [FAZ4-001] Bu sınıf, sistemin çöküş ve başarı senaryolarını modellemektedir.
     ```
 
-### 2. Hedef: `core/domain/model/Pet.kt` (Varlık Hukuku Mührü)
+### 2. Hedef: `core/domain/repository/DiscoveryRepository.kt` (Keşif Sözleşmesi Mührü)
 
-*   **Gerekçe:** Bu dosya, projenin en temel varlığını ("Pet") tanımlar. Bu modeldeki bir değişiklik, tüm sistemi etkiler.
+*   **Gerekçe:** Keşif verilerine erişim için anayasal bir sözleşme tanımlar.
 *   **Enjekte Edilecek Mühür:**
     ```kotlin
-    // @pin: [FAZ0-001] Bu model, projenin temel problemini çözmek için var olan bir varlıktır.
-    ```
-
-### 3. Hedef: `core/domain/repository/AuthRepository.kt` (Sözleşme Mührü)
-
-*   **Gerekçe:** Bu arayüz, Data ve Domain katmanları arasındaki anayasal sözleşmedir. Bu sözleşmenin ihlali, mimari bir çöküştür.
-*   **Enjekte Edilecek Mühür:**
-    ```kotlin
-    // @pin: [FAZ1-001] Bu arayüz, modüller arası bir sözleşmedir ve toolchain bütünlüğünün parçasıdır.
+    // @pin: [FAZ1-001] Bu arayüz, modüller arası bir sözleşmedir.
     ```
 
 ## HEDEF BÖLGE: VERİ MAHZENLERİ (DATA KATMANI)
 
-### 4. Hedef: `core/data/repository/MockAuthRepository.kt` (Veri Gerçekliği Mührü)
+### 3. Hedef: `core/data/repository/MockDiscoveryRepository.kt` (Sahte Veri Mührü)
 
-*   **Gerekçe:** Bu dosya, test ve geliştirme sırasında "sahte veri" üreterek sistemin gerçeklik algısını etkiler. Ürettiği verinin anayasal olarak kontrol altında olması gerekir.
+*   **Gerekçe:** Test sırasında sahte "keşif" verileri üreterek sistemin gerçeklik algısını etkiler.
 *   **Enjekte Edilecek Mühür:**
     ```kotlin
-    // @pin: [FAZ4-001] Bu mock repository, sistemin dayanıklılık ve çöküş testlerinde kritik bir rol oynar.
+    // @pin: [FAZ4-001] Bu mock repository, sistemin dayanıklılık testlerinde kritik rol oynar.
     ```
 
-### 5. Hedef: `core/data/di/DataModule.kt` (Tedarik Zinciri Mührü)
+## HEDEF BÖLGE: NAVİGASYON (SİSTEMİN DAMARLARI)
 
-*   **Gerekçe:** Bu Hilt/Dagger modülü, veri kaynaklarının nasıl sağlanacağını tanımlayarak sistemin "tedarik zincirini" oluşturur. Bu zincirdeki bir hata, tüm sistemi zehirleyebilir.
+### 4. Hedef: `app/src/main/java/com/patidost/app/navigation/AppNavGraph.kt`
+
+*   **Gerekçe:** Uygulama içi ekran geçişlerinin ana mantığını ve rotalarını tanımlar. Sistemin seyrüsefer haritasıdır.
 *   **Enjekte Edilecek Mühür:**
     ```kotlin
-    // @pin: [FAZ1-001] Bağımlılıkların sağlanması, sistemin inşa ve toolchain bütünlüğünün bir parçasıdır.
+    // @pin: [CORE-001] Tüm navigasyon kararları, Mutlak Şüphe ilkesine tabidir.
     ```
 
 ---
-**SONRAKİ ADIM:** Bu planın onaylanmasının ardından, belirtilen mühürlerin ilgili dosyalara fiziksel olarak enjekte edilmesi ve ardından MAP-001 motorunun yeniden çalıştırılarak anayasal kapsama oranının yükseldiğinin kanıtlanması.
+**SONRAKİ ADIM:** Bu planın onaylanmasının ardından, belirtilen mühürlerin ilgili dosyalara fiziksel olarak enjekte edilmesi ve MAP-001 motorunun yeniden çalıştırılarak anayasal kapsama oranının yükseldiğinin kanıtlanması.
