@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+REPO_ROOT=$(git rev-parse --show-toplevel)
+COMMIT_MSG=$(cat "$1")
+PIN_PATTERN="\[([A-Z0-9]+-[0-9]+)\]"
+
+if [[ $COMMIT_MSG =~ $PIN_PATTERN ]]; then
+    REF_ID="${BASH_REMATCH[1]}"
+    if bash "$REPO_ROOT/scripts/constitutional_ref_scanner.sh" "$REF_ID"; then
+        echo "✅ Anayasal referans doğrulandı: $REF_ID"
+        exit 0
+    else
+        echo "🔴 ANAYASAL İHLAL (ML-002): '$REF_ID' bulunamadı!"
+        exit 1
+    fi
+else
+    echo "🔴 ANAYASAL İHLAL (ML-001): Format hatası! [ID-NO] gerekli."
+    exit 1
+fi

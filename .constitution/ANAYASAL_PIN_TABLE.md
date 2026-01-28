@@ -1,17 +1,5 @@
-# PATIDOST ANAYASAL PIN TABLE (v5.0 - REALIGNED)
-
-**DURUM:** HİZALANDI (Yeniden Mühürlenmeye Hazır)
-**SON GÜNCELLEME:** PHOENIX v5 Adli Sabitleme
-
-| PIN ID | NORM SEVİYESİ | FİZİKSEL YOL | STATÜ |
-| :--- | :--- | :--- | :--- |
-| **PGC-001**| **MUTLAK ÜST NORM** | `.constitution/GLOBAL_PRE_EMPTIVE_CONSTITUTION.md` | **KİLİTLİ** |
-| CORE-001 | META-ANAYASA | `.constitution/PATIDOST_CORE_CONSTITUTION.md` | **AKTİF** |
-| FAZ0-001 | KURUCU PRENSİPLER | `.constitution/FAZ_0_CORE_PRINCIPLES.md` | **AKTİF** |
-| FAZ1-001 | BUILD & TOOLCHAIN | `.constitution/BUILD_AND_TOOLCHAIN_CONSTITUTION.md` | **AKTİF** |
-| FAZ4-001 | DAYANIKLILIK | `.constitution/SYSTEM_RESILIENCE_AND_COLLAPSE_CONSTITUTION.md` | **AKTİF** |
-| FAZ5-001 | EVRİM & DEĞİŞİM | `.constitution/SYSTEM_EVOLUTION_AND_CHANGE_CONSTITUTION.md` | **AKTİF** |
-| FAZ6-001 | META-YÖNETİŞİM | `.constitution/META_GOVERNANCE_AND_CONTROL_CONSTITUTION.md` | **AKTİF** |
-| LEGACY-001| MEŞRUİYET | `.constitution/CONSTITUTIONAL_LEGITIMACY_CHARTER.md` | **AKTİF** |
-| AI-E-001 | AI GİRİŞ NOKTASI | `.constitution/ANDROID_STUDIO_AI_ENTRY.md` | **AKTİF** |
-| SELF-REF | KENDİ KAYDI | `.constitution/ANAYASAL_PIN_TABLE.md` | **AKTİF** |
+| PIN | TANIM | STATÜ |
+| :--- | :--- | :--- |
+| CORE-001 | Çekirdek Anayasa | AKTİF |
+| ML-001 | Bağ Kilidi | AKTİF |
+| ML-002 | Doğrulama Kilidi | AKTİF |
