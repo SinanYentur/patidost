@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# MAP-001: Anayasal Haritalama Motoru v5.1 (Nihai Budama)
+# MAP-001: Anayasal Haritalama Motoru v7.0 (Lazer Odaklı Tarama)
 
 set -euo pipefail
 
@@ -11,34 +11,37 @@ ORPHANED_FILE_LOG="$REPORTS_DIR/ORPHANED_FILES.log"
 
 mkdir -p "$REPORTS_DIR"
 
+# BEYAZ LİSTE (LAZER ODAKLI): Sadece anayasal olarak en kritik olan Data ve Domain katmanları.
+TARGET_DIRS=("core/data/src" "core/domain/src")
+
 # --- Motor Fonksiyonları ---
 
-echo "[1/2] Kod tabanındaki anayasal referanslar taranıyor (Hijyenik Mod)..."
+echo "[1/2] Stratejik katmanlar (Data/Domain) taranıyor..."
 GREP_PATTERN="@pin:"
-EXCLUDE_DIRS='--exclude-dir={.git,.idea,.gradle,.constitution_backup*,reports,build}'
-FOUND_REFS_WITH_PATHS=$(grep -r -E -o "$GREP_PATTERN \\[([A-Z0-9-]+)\\]" app/src core feature $EXCLUDE_DIRS || true)
+# Sadece beyaz listedeki dizinleri tara
+FOUND_REFS_WITH_PATHS=$(grep -r -H -E -o "$GREP_PATTERN \\[([A-Z0-9-]+)\\]" "${TARGET_DIRS[@]}" || true)
 
-echo "[2/2] İstatistikler ve Yetim Dosya Analizi yapılıyor..."
+echo "[2/2] Stratejik İstatistikler ve Yetim Dosya Analizi yapılıyor..."
 
 FOUND_COUNT=$(echo -n "$FOUND_REFS_WITH_PATHS" | wc -l | tr -d ' ')
 
-# Yetim Dosyaları Bul (Sadece beyaz listedeki .kt ve .xml dosyalarını hedef al)
-# ONARIM v3: -prune ile build klasörlerini tamamen yok say.
-find app core feature -path "*/build" -prune -o -type f \( -name "*.kt" -o -name "*.xml" \) -print0 | xargs -0 grep -L "$GREP_PATTERN" > "$ORPHANED_FILE_LOG" || true
+# Yetim Dosyaları Bul (Sadece Data ve Domain'i hedef al)
+> "$ORPHANED_FILE_LOG"
+find "${TARGET_DIRS[@]}" -type f \( -name "*.kt" \) -print0 | xargs -0 grep -L "$GREP_PATTERN" > "$ORPHANED_FILE_LOG" || true
 TOTAL_ORPHANS=$(wc -l < "$ORPHANED_FILE_LOG" | tr -d ' ')
 
 {
-    echo "# ANAYASAL KAPSAMA RAPORU (MAP-001)";
+    echo "# ANAYASAL KAPSAMA RAPORU (MAP-001) - STRATEJİK ODAK";
     echo "*Oluşturma Tarihi: $(date)*";
     echo "";
-    echo "## 📊 Özet Metrikler";
-    echo "- **Tespit Edilen Toplam Anayasal Referans Sayısı (Kodda):** **$FOUND_COUNT**";
-    echo "- **Tespit Edilen Yetim Dosya Sayısı (app, core, feature):** **$TOTAL_ORPHANS**";
+    echo "## 📊 Stratejik Metrikler (Data & Domain)";
+    echo "- **Tespit Edilen Stratejik Referans Sayısı:** **$FOUND_COUNT**";
+    echo "- **Tespit Edilen Stratejik Yetim Dosya Sayısı:** **$TOTAL_ORPHANS**";
     echo "";
     echo "--- ";
     echo "";
-    echo "## 🗺️ Anayasal Referans Haritası";
-    echo "*Projede bulunan tüm anayasal etiketler ve bulundukları yerler:*" ;
+    echo "## 🗺️ Stratejik Anayasal Referans Haritası";
+    echo "*Data ve Domain katmanlarında bulunan anayasal etiketler:*" ;
     echo "\`\`\`";
     echo "$FOUND_REFS_WITH_PATHS";
     echo "\`\`\`";
