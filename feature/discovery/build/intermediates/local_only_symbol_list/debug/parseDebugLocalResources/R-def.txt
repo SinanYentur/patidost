@@ -1,0 +1,7 @@
+R_DEF: Internal format may change without notice
+local
+string discovery_dislike_button_content_description
+string discovery_like_button_content_description
+string discovery_no_more_pets
+string discovery_pet_age_format
+string discovery_pet_photo_content_description

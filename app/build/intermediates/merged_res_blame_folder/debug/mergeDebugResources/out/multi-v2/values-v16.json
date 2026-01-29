@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.patidost.app-mergeDebugResources-71:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Kratos35\\.gradle\\caches\\transforms-4\\dc8b30cde7a5d0a36807a98609a3119e\\transformed\\appcompat-1.6.1\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    }
+                }
+            ]
+        }
+    ]
+}

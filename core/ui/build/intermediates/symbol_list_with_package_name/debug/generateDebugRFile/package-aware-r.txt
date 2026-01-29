@@ -1,0 +1,7 @@
+com.patidost.core.ui
+font montserrat_bold
+font montserrat_light
+font montserrat_medium
+font montserrat_regular
+font montserrat_semibold
+string default_web_client_id

@@ -1,0 +1,38 @@
+build:
+  maxIssues: 0
+
+config:
+  validation: true
+
+complexity:
+  TooManyFunctions:
+    active: true
+    thresholdInFiles: 20
+  LongMethod:
+    active: true
+    threshold: 60
+  LongParameterList:
+    active: true
+    functionThreshold: 6
+    constructorThreshold: 7
+
+style:
+  MagicNumber:
+    active: true
+    ignoreNumbers: ['-1', '0', '1', '2', '100', '1000']
+  EmptyFunctionBlock:
+    active: true
+  EmptyCatchBlock:
+    active: true
+    allowedExceptionNameRegex: "^(_|(ignore|expected).*)"
+
+comments:
+  AbsentOrWrongFileHeader:
+    active: false
+
+potential-bugs:
+  active: true
+  EqualsWithHashCodeExist:
+    active: true
+  UnsafeCast:
+    active: true

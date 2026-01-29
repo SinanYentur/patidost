@@ -1,0 +1,5 @@
+int string discovery_dislike_button_content_description 0x0
+int string discovery_like_button_content_description 0x0
+int string discovery_no_more_pets 0x0
+int string discovery_pet_age_format 0x0
+int string discovery_pet_photo_content_description 0x0
