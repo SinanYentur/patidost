@@ -171,3 +171,5 @@ Bu liste, `find_files` komutuyla bulunan tüm kritik dosyaları içerir ve proje
 
 ### 📌 EK ANAYASAL PROTOKOLLER
 .constitution/ANAYASAL_EK_PROTOKOL.md
+- [100] PROJE_AETHER_MAGNUM_OPUS.md (MUTLAK ANAYASA) git add ANAYASAL_PIN_TABLE.md
+ echo - [100] PROJE_AETHER_MAGNUM_OPUS.md (MUTLAK ANAYASA)
