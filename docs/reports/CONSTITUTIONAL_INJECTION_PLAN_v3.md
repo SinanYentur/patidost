@@ -1,44 +1,40 @@
-# ANAYASAL ENJEKSİYON PLANI (v3.0 - SON KALE)
+# ANAYASAL ENJEKSİYON PLANI (v3.0 - İLK TEMAS)
 
 **ANAYASAL KİMLİK BLOĞU**
 ---
-- **FAZ:** FAZ-2 / ÖNCELİK-3: Enjeksiyon Genişletme
-- **AMAÇ:** Data ve Domain katmanlarındaki anayasal kapsama oranını %100'e çıkarmak ve tespit edilen mimari anomalileri çözmek.
-- **DAYANAK:** `reports/ORPHANED_FILES.log` (4 Stratejik Yetim Tespiti)
+- **FAZ:** FAZ-3: Fonksiyonel Doğum
+- **AMAÇ:** Feature katmanındaki "Sıfır Meşruiyet" krizini sona erdirmek ve ilk kullanıcı akışını anayasal güvenceye almak.
+- **DAYANAK:** `reports/ORPHANED_FILES.log` (46 Yetim Dosya Tespiti)
 
 ---
 
-## 1. HEDEF: STRATEJİK YETİMLERİN MÜHÜRLENMESİ
+## HEDEF BÖLGE: SİSTEMİN DAMARLARI (NAVİGASYON)
 
-### 1.1. Hedef: `core/data/src/main/java/com/patidost/core/data/repository/MockDiscoveryRepository.kt`
+### 1. Hedef: `app/src/main/java/com/patidost/app/navigation/AppNavGraph.kt`
 
-*   **Gerekçe:** Keşif özelliği için sahte veri üreten bu kaynak, dayanıklılık testlerinin temelidir.
+*   **Gerekçe:** Uygulamanın tüm ekran rotalarını ve geçiş mantığını tanımlayan ana haritadır. Buradaki bir hata, kullanıcının sistem içinde kaybolmasına neden olur.
 *   **Enjekte Edilecek Mühür:**
     ```kotlin
-    // @pin: [FAZ4-001] Bu mock repository, sistemin dayanıklılık ve çöküş testlerinde kritik bir rol oynar.
+    // @pin: [FAZ1-001] Navigasyon grafiği, modüller arası bir sözleşmedir ve sistemin bütünlüğünü tanımlar.
     ```
 
-### 1.2. Hedef: `core/domain/src/main/java/com/patidost/core/domain/auth/AuthResult.kt`
+## HEDEF BÖLGE: KİMLİK DOĞRULAMA AKIŞI (FEATURE/AUTH)
 
-*   **Gerekçe:** Kimlik doğrulama işlemlerinin başarı/hata durumlarını modelleyen temel bir varlıktır.
+### 2. Hedef: `feature/auth/src/main/java/com/patidost/feature/auth/AuthViewModel.kt`
+
+*   **Gerekçe:** Kullanıcı giriş/kayıt işlemlerinin tüm iş mantığını ve durum yönetimini üstlenir. Sistemin en hassas operasyonlarından biridir.
 *   **Enjekte Edilecek Mühür:**
     ```kotlin
-    // @pin: [FAZ5-001] Bu veri sınıfı, sistemin durum ve evrim mantığının bir parçasıdır.
+    // @pin: [CORE-001] Bu ViewModel, kimlik doğrulama gibi kritik bir iş mantığını yönettiği için Mutlak Şüphe ilkesine tabidir.
     ```
 
-### 1.3. Hedef: `core/domain/src/main/java/com/patidost/core/domain/repository/DiscoveryRepository.kt`
+### 3. Hedef: `feature/auth/src/main/java/com/patidost/feature/auth/LoginScreen.kt`
 
-*   **Gerekçe:** Keşif özelliği için veri katmanıyla olan anayasal sözleşmeyi tanımlar.
+*   **Gerekçe:** Kullanıcının sistemle ilk temas kurduğu ve kimliğini beyan ettiği arayüzdür. Güvenli ve anayasal olarak tutarlı olmalıdır.
 *   **Enjekte Edilecek Mühür:**
     ```kotlin
-    // @pin: [FAZ1-001] Bu arayüz, modüller arası bir sözleşmedir.
+    // @pin: [FAZ0-001] Giriş ekranı, projenin temel problemini (güvenli erişim) çözen ana yüzeylerden biridir.
     ```
-
-## 2. KRİTİK MİMARİ ANOMALİ: İKİZ DOSYA TESPİTİ (ANOM-001)
-
-*   **Tespit:** MAP-001 motoru, iki farklı yolda (`core/domain/auth/` ve `core/domain/repository/`) `AuthRepository.kt` adında iki dosya olduğunu tespit etmiştir. Biri mühürlü, diğeri yetimdir.
-*   **Hüküm:** Bu, "Tekil Hakikat Kaynağı" (Single Source of Truth) ilkesinin ihlalidir ve anayasal belirsizlik yaratır.
-*   **Eylem Planı:** Anayasal olarak mühürlenmemiş ve yetim olan `core/domain/auth/AuthRepository.kt` dosyası mühürlenmeyecek, bunun yerine **SİLİNECEKTİR**. Bu, belirsizliği ortadan kaldıracak ve anayasayı daha da güçlendirecektir.
 
 ---
-**SONRAKİ ADIM:** Bu planın onaylanmasının ardından, 3 dosyanın mühürlenmesi ve 1 anomalili dosyanın silinmesi icra edilecektir. Ardından MAP-001 motoru çalıştırılarak, stratejik katmanlarda %100 kapsama oranına ulaşıldığı kanıtlanacaktır.
+**SONRAKİ ADIM:** Bu planın onaylanmasının ardından, belirtilen mühürlerin ilgili dosyalara fiziksel olarak enjekte edilmesi ve ardından MAP-001 motorunun yeniden çalıştırılarak anayasal kapsama oranının yükseldiğinin kanıtlanması.

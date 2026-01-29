@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# MAP-001: Anayasal Haritalama Motoru v7.0 (Lazer Odaklı Tarama)
+# MAP-001: Anayasal Haritalama Motoru v7.1 (Feature Katmanı Taraması)
 
 set -euo pipefail
 
@@ -11,37 +11,38 @@ ORPHANED_FILE_LOG="$REPORTS_DIR/ORPHANED_FILES.log"
 
 mkdir -p "$REPORTS_DIR"
 
-# BEYAZ LİSTE (LAZER ODAKLI): Sadece anayasal olarak en kritik olan Data ve Domain katmanları.
-TARGET_DIRS=("core/data/src" "core/domain/src")
+# BEYAZ LİSTE (GENİŞLETİLMİŞ): Artık feature katmanları da anayasal denetime tabidir.
+TARGET_DIRS=("app/src" "core" "feature")
 
 # --- Motor Fonksiyonları ---
 
-echo "[1/2] Stratejik katmanlar (Data/Domain) taranıyor..."
+echo "[1/2] Stratejik ve Fonksiyonel katmanlar taranıyor..."
 GREP_PATTERN="@pin:"
-# Sadece beyaz listedeki dizinleri tara
-FOUND_REFS_WITH_PATHS=$(grep -r -H -E -o "$GREP_PATTERN \\[([A-Z0-9-]+)\\]" "${TARGET_DIRS[@]}" || true)
+# ONARIM v4: find komutunu doğrudan TARGET_DIRS ile kullanmak, Windows yollarında daha stabil çalışır.
+FOUND_REFS_WITH_PATHS=$(find "${TARGET_DIRS[@]}" -type f -print0 | xargs -0 grep -H -E -o "$GREP_PATTERN \\[([A-Z0-9-]+)\\]" || true)
 
-echo "[2/2] Stratejik İstatistikler ve Yetim Dosya Analizi yapılıyor..."
+
+echo "[2/2] İstatistikler ve Yetim Dosya Analizi yapılıyor..."
 
 FOUND_COUNT=$(echo -n "$FOUND_REFS_WITH_PATHS" | wc -l | tr -d ' ')
 
-# Yetim Dosyaları Bul (Sadece Data ve Domain'i hedef al)
+# Yetim Dosyaları Bul (Aynı genişletilmiş kapsamda)
 > "$ORPHANED_FILE_LOG"
-find "${TARGET_DIRS[@]}" -type f \( -name "*.kt" \) -print0 | xargs -0 grep -L "$GREP_PATTERN" > "$ORPHANED_FILE_LOG" || true
+find "${TARGET_DIRS[@]}" -path "*/build" -prune -o -type f \( -name "*.kt" -o -name "*.xml" \) -print0 | xargs -0 grep -L "$GREP_PATTERN" > "$ORPHANED_FILE_LOG" || true
 TOTAL_ORPHANS=$(wc -l < "$ORPHANED_FILE_LOG" | tr -d ' ')
 
 {
-    echo "# ANAYASAL KAPSAMA RAPORU (MAP-001) - STRATEJİK ODAK";
+    echo "# ANAYASAL KAPSAMA RAPORU (MAP-001) - FAZ-3 BAŞLANGIÇ";
     echo "*Oluşturma Tarihi: $(date)*";
     echo "";
-    echo "## 📊 Stratejik Metrikler (Data & Domain)";
-    echo "- **Tespit Edilen Stratejik Referans Sayısı:** **$FOUND_COUNT**";
-    echo "- **Tespit Edilen Stratejik Yetim Dosya Sayısı:** **$TOTAL_ORPHANS**";
+    echo "## 📊 Genel Metrikler (app, core, feature)";
+    echo "- **Tespit Edilen Toplam Anayasal Referans Sayısı (Kodda):** **$FOUND_COUNT**";
+    echo "- **Tespit Edilen Yetim Dosya Sayısı:** **$TOTAL_ORPHANS**";
     echo "";
     echo "--- ";
     echo "";
-    echo "## 🗺️ Stratejik Anayasal Referans Haritası";
-    echo "*Data ve Domain katmanlarında bulunan anayasal etiketler:*" ;
+    echo "## 🗺️ Anayasal Referans Haritası";
+    echo "*Projede bulunan tüm anayasal etiketler ve bulundukları yerler:*" ;
     echo "\`\`\`";
     echo "$FOUND_REFS_WITH_PATHS";
     echo "\`\`\`";
