@@ -1,35 +1,29 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+# ANAYASAL İGNORASYON FERMANI (v2.0 - KİLİTLİ)
+# Bu dosyalar ve klasörler, sistem evreninde asla varlık kazanamaz.
 
-# -- PATIDOST FABRİKA GÜVENLİK KURALLARI --
+# 1. Derleme ve Çalışma Zamanı Çıktıları
+/build
+
+# 2. IDE ve Ortam Dosyaları
+.idea/
+*.iml
+.DS_Store
+
+# 3. Yerel Yapılandırma ve Sırlar
+local.properties
 *.jks
 *.keystore
 *.pem
-*.p12
-*.key
 google-services.json
-key.properties
-secrets.properties
 
-/test-results
-/reports
-/jacoco
-/detekt-reports
+# 4. Gradle Önbelleği
+.gradle/
 
-.devbox/
-devbox.lock
+# 5. Raporlar ve Loglar
+reports/
+detekt-reports/
+jacoco/
 *.log
-*.tmp
+
+# 6. İşletim Sistemi ve Hata Dökümleri
+sh.exe.stackdump
